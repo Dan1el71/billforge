@@ -1,0 +1,18 @@
+# Production profile: a clustered Quartz store backed by PostgreSQL.
+spring:
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: BILLFORGEScheduler
+            instanceId: AUTO
+          jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            useProperties: true
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 15000
