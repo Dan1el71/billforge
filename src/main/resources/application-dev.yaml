@@ -21,6 +21,7 @@ spring:
             enable: true
 
   quartz:
+    job-store-type: jdbc
     jdbc:
       initialize-schema: always
     properties:
@@ -29,6 +30,7 @@ spring:
           scheduler:
             instanceName: BILLFORGEScheduler-Dev
           jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
             isClustered: false
           threadPool:
             threadCount: 3
