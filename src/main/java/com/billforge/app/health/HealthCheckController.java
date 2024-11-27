@@ -21,7 +21,7 @@ public class HealthCheckController {
     public ResponseEntity<ApiResponse<Map<String, Object>>> healthCheck() {
         Map<String, Object> health = Map.of(
                 "status", "UP",
-                "service", "Multi-Tenant Billing System",
+                "service", "Billforge",
                 "version", "1.0.0",
                 "timestamp", Instant.now().toString());
         return ResponseEntity.ok(ApiResponse.success(health));
