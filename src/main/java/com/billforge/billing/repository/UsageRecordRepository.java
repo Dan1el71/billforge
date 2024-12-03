@@ -47,6 +47,15 @@ public interface UsageRecordRepository extends JpaRepository<UsageRecord, Long> 
             @Param("metric") UsageMetric metric,
             @Param("start") Instant start);
 
+    @Query("SELECT COALESCE(SUM(u.quantity), 0) FROM UsageRecord u " +
+           "WHERE u.tenantId = :tenantId AND u.metricType = :metric " +
+           "AND u.billingPeriodStart >= :start AND u.billingPeriodStart < :end AND u.deleted = false")
+    Long sumCountByTenantAndMetricBetween(
+            @Param("tenantId") Long tenantId,
+            @Param("metric") UsageMetric metric,
+            @Param("start") Instant start,
+            @Param("end") Instant end);
+
     Optional<UsageRecord> findByTenantIdAndMetricTypeAndBillingPeriodStart(
             Long tenantId, UsageMetric metricType, Instant periodStart);
 
