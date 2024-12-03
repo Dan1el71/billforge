@@ -1,0 +1,7 @@
+apiVersion: 1
+providers:
+  - name: billforge
+    folder: Billforge
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards
