@@ -31,7 +31,7 @@ import java.util.concurrent.Executor;
  *   app.async.queue-capacity: 100
  *
  * THREAD NAMING:
- *   Threads are named "mtbs-async-{N}" - visible in thread dumps and MDC logs.
+ *   Threads are named "billforge-async-{N}" - visible in thread dumps and MDC logs.
  *
  * IMPLEMENTS AsyncConfigurer:
  *   Makes this executor the default for all @Async methods that don't specify
@@ -49,7 +49,7 @@ public class AsyncConfig implements AsyncConfigurer {
         executor.setCorePoolSize(5);
         executor.setMaxPoolSize(20);
         executor.setQueueCapacity(100);
-        executor.setThreadNamePrefix("mtbs-async-");
+        executor.setThreadNamePrefix("billforge-async-");
         executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setAwaitTerminationSeconds(30);
 
@@ -66,7 +66,7 @@ public class AsyncConfig implements AsyncConfigurer {
         executor.setCorePoolSize(2);
         executor.setMaxPoolSize(5);
         executor.setQueueCapacity(500);
-        executor.setThreadNamePrefix("mtbs-audit-");
+        executor.setThreadNamePrefix("billforge-audit-");
         executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setAwaitTerminationSeconds(30);
 
