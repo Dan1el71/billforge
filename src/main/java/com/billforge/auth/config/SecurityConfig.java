@@ -76,7 +76,7 @@ public class SecurityConfig {
         http
                 // CSRF disabled - stateless JWT architecture has no CSRF attack surface.
                 // CSRF is a session-cookie exploit. We use HttpOnly JWT cookies with
-                // SameSite=Strict, which browsers already block cross-origin.
+                // SameSite=Lax, which blocks them on cross-site POST requests.
                 .csrf(AbstractHttpConfigurer::disable)
 
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
