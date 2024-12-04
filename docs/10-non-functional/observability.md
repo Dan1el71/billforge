@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -49,11 +49,11 @@ Took 2 hours to find: SMTP timeout in email notification blocked entire workflow
 **After observability:**
 ```
 Same failure, but correlated logs with correlationId=abc-123:
-[2026-05-17 14:30:15] WARN [correlationId=abc-123] [tenantId=t1] 
+[2024-05-17 14:30:15] WARN [correlationId=abc-123] [tenantId=t1] 
   PaymentService: verifyAndCapturePayment succeeded ($2799.67)
-[2026-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
+[2024-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
   SubscriptionService: activateUpgradeAfterPayment in progress
-[2026-05-17 14:30:16] ERROR [correlationId=abc-123] [tenantId=t1]
+[2024-05-17 14:30:16] ERROR [correlationId=abc-123] [tenantId=t1]
   NotificationService: SMTP timeout sending PLAN_UPGRADED email, queued for retry
 
 All logs appear in one search. Root cause found in 30 seconds.
@@ -63,7 +63,7 @@ All logs appear in one search. Root cause found in 30 seconds.
 
 **Unstructured (bad):**
 ```
-2026-05-17 14:30:15 Payment processed for user in tenant X with id Y amount 2799.67
+2024-05-17 14:30:15 Payment processed for user in tenant X with id Y amount 2799.67
 ```
 - Cannot parse programmatically
 - Grep alone finds false positives (other tenants, other payments)
@@ -72,9 +72,9 @@ All logs appear in one search. Root cause found in 30 seconds.
 **Structured (good):**
 ```json
 {
-  "timestamp": "2026-05-17T14:30:15.123Z",
+  "timestamp": "2024-05-17T14:30:15.123Z",
   "level": "INFO",
-  "logger": "com.mtbs.billing.service.PaymentService",
+  "logger": "com.billforge.billing.service.PaymentService",
   "message": "Payment captured successfully",
   "correlationId": "abc-123",
   "tenantId": "t1",
@@ -112,12 +112,12 @@ All logs appear in one search. Root cause found in 30 seconds.
 logging:
   level:
     root: INFO
-    com.mtbs: DEBUG
+    com.billforge: DEBUG
   pattern:
     console: "%d{ISO8601} %highlight(%-5level) [%X{tenantId}] [%X{correlationId}] %logger{36} : %msg%n"
     file: "%d{ISO8601} %-5level [%X{tenantId}] [%X{correlationId}] %logger{36} : %msg%n"
   file:
-    name: logs/mtbs.log
+    name: logs/billforge.log
     max-size: 100MB
     max-history: 30
 
@@ -217,9 +217,9 @@ public class PaymentService {
 **Output (JSON format via Logback encoder):**
 ```json
 {
-  "@timestamp": "2026-05-17T14:30:15.123Z",
+  "@timestamp": "2024-05-17T14:30:15.123Z",
   "level": "INFO",
-  "logger_name": "com.mtbs.billing.service.PaymentService",
+  "logger_name": "com.billforge.billing.service.PaymentService",
   "message": "Payment captured successfully",
   "tenantId": "t1",
   "correlationId": "abc-123",
@@ -246,8 +246,8 @@ public class PaymentService {
 logging:
   level:
     root: WARN
-    com.mtbs: INFO  # Business logic = INFO
-    com.mtbs.billing: DEBUG  # High-sensitivity module = DEBUG
+    com.billforge: INFO  # Business logic = INFO
+    com.billforge.billing: DEBUG  # High-sensitivity module = DEBUG
     org.springframework.web: WARN
     org.springframework.security: WARN
 ```
@@ -263,7 +263,7 @@ logging:
 public class MetricsAspect {
     private final MeterRegistry meterRegistry;
     
-    @Around("@annotation(com.mtbs.shared.Metrics)")
+    @Around("@annotation(com.billforge.shared.Metrics)")
     public Object measureLatency(ProceedingJoinPoint pjp) throws Throwable {
         String methodName = pjp.getSignature().getName();
         String className = pjp.getSignature().getDeclaringType().getSimpleName();
@@ -451,7 +451,7 @@ Zipkin UI shows:
 **Define Alerts in prometheus.yml:**
 ```yaml
 groups:
-  - name: mtbs_billing
+  - name: billforge_billing
     rules:
       # Payment failures spike
       - alert: PaymentFailureRateHigh
@@ -572,7 +572,7 @@ receivers:
    Authorization: Bearer <JWT>
 
 2. RequestLoggingFilter intercepts:
-   [2026-05-17 14:30:15] INFO  RequestFilter: 
+   [2024-05-17 14:30:15] INFO  RequestFilter: 
    MDC.put("correlationId", "abc-123")
    MDC.put("tenantId", "t1")
    MDC.put("userId", "u42")
@@ -580,27 +580,27 @@ receivers:
    MDC.put("path", "/api/payments/verify")
 
 3. PaymentController logs entry:
-   [2026-05-17 14:30:15] DEBUG [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:15] DEBUG [correlationId=abc-123] [tenantId=t1]
    PaymentController: POST /verify called, invoiceId=inv_999
 
 4. PaymentService logs step-by-step:
-   [2026-05-17 14:30:15] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:15] INFO [correlationId=abc-123] [tenantId=t1]
    PaymentService: Fetching invoice inv_999
    
-   [2026-05-17 14:30:15] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:15] INFO [correlationId=abc-123] [tenantId=t1]
    PaymentService: Verifying PaymentIntent
    
-   [2026-05-17 14:30:15] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:15] INFO [correlationId=abc-123] [tenantId=t1]
    PaymentService: Signature verified, capturing payment
    
-   [2026-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
    PaymentService: Payment captured, invoking subscription upgrade
    
 5. SubscriptionService logs:
-   [2026-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
    SubscriptionService: Activating upgrade after payment, invoiceId=inv_999
    
-   [2026-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:16] INFO [correlationId=abc-123] [tenantId=t1]
    SubscriptionService: Subscription upgrade completed, planId=2 (PRO)
 
 6. Metrics recorded:
@@ -609,14 +609,14 @@ receivers:
    subscription_upgrade_completed_total{fromPlan="free", toPlan="pro"} += 1
 
 7. Event published (async):
-   [2026-05-17 14:30:16] DEBUG [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:16] DEBUG [correlationId=abc-123] [tenantId=t1]
    DomainEventPublisher: Publishing PLAN_UPGRADED event
    
    NotificationEventListener async processes:
-   [2026-05-17 14:30:18] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:18] INFO [correlationId=abc-123] [tenantId=t1]
    NotificationService: Sending PLAN_UPGRADED notification via email
    
-   [2026-05-17 14:30:18] INFO [correlationId=abc-123] [tenantId=t1]
+   [2024-05-17 14:30:18] INFO [correlationId=abc-123] [tenantId=t1]
    SmtpEmailProvider: Email sent to user@example.com
    
    notification_delivered{type="PlanUpgradedEvent"} += 1
@@ -710,7 +710,7 @@ public void handleWebhook(@RequestHeader("X-Correlation-ID") String correlationI
 
 7. **No Cost Tracking** - Metrics don't track infrastructure costs (API calls, database queries). Hard to understand cost impact of individual features.
 
-8. **Log Volume at DEBUG Level** - Setting com.mtbs=DEBUG increases log volume 5-10x, straining disk I/O and log aggregation. Need environment-specific log levels.
+8. **Log Volume at DEBUG Level** - Setting com.billforge=DEBUG increases log volume 5-10x, straining disk I/O and log aggregation. Need environment-specific log levels.
 
 ---
 
@@ -736,7 +736,7 @@ public void handleWebhook(@RequestHeader("X-Correlation-ID") String correlationI
 
 ## Related Documents
 
-- [notification-module.md](./notification-module.md) - Observability in notification event handling
-- [payment-processing.md](./payment-processing.md) - Metrics in payment flows
-- [scheduler-jobs.md](../06-scheduler/scheduler-jobs.md) - Observability for scheduled tasks
-- [ENTERPRISE_REFACTORING_SUMMARY.md](../ENTERPRISE_REFACTORING_SUMMARY.md) - Architectural context
+- [notification-module.md](../08-events/notification-module.md) - Observability in notification event handling
+- [payment-processing.md](../05-platform-billing/payment-processing.md) - Metrics in payment flows
+- [scheduler-jobs.md](../09-jobs/scheduler-jobs.md) - Observability for scheduled tasks
+- [ENTERPRISE_REFACTORING_SUMMARY.md](../00-overview/README.md) - Architectural context

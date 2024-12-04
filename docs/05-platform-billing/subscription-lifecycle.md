@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -127,9 +127,9 @@ Billforge implements scheduled downgrade by default (recommended), with immediat
 
 ### Configuration
 - `spring.jpa.hibernate.ddl-auto: validate` - Schema changes via Flyway only
-- `mtbs.trial-days: 14` - Free plan trial duration
-- `mtbs.billing-cycle.default: MONTHLY` - Default billing cycle
-- `mt bs.stripe.publishable-key`, `mtbs.stripe.secret-key` - Stripe integration (for orders)
+- `billforge.trial-days: 14` - Free plan trial duration
+- `billforge.billing-cycle.default: MONTHLY` - Default billing cycle
+- `mt bs.stripe.publishable-key`, `billforge.stripe.secret-key` - Stripe integration (for orders)
 
 ---
 

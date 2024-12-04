@@ -4,7 +4,7 @@
 
 The **Multi-Tenancy Isolation Test Suite** validates that tenants are completely isolated from each other-one tenant's data cannot leak into another's. This is critical for SaaS security and compliance.
 
-**Test Location:** `src/test/java/com/mtbs/integration/MultiTenancyIntegrationTest.java`
+**Test Location:** `src/test/java/com/billforge/integration/MultiTenancyIntegrationTest.java`
 
 ---
 
@@ -608,6 +608,6 @@ public List<Invoice> getInvoices() {
 
 ## Related Documentation
 
-- [Multi-Tenancy Architecture](../backend/02-multi-tenancy/isolation.md)
+- [Multi-Tenancy Architecture](../02-multi-tenancy/multi-tenancy-strategy.md)
 - [Testing Strategy](./testing-strategy.md)
-- [Security & Authorization](../backend/03-security/authorization.md)
+- [Security & Authorization](../03-security/authorization-rbac.md)

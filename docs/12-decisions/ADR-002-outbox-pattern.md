@@ -1,6 +1,6 @@
 # ADR-002: Transactional Outbox Pattern for Reliable Event Publishing
 
-**Date:** May 2026  
+**Date:** September 2024  
 **Status:** Accepted  
 **Decision Maker:** Architecture Team  
 **Stakeholders:** Backend Team, Payments, Notifications
@@ -604,7 +604,7 @@ void eventHandlerIsIdempotent() {
 ## Related ADRs
 
 - [ADR-001: Schema-Per-Tenant](./ADR-001-schema-per-tenant.md)
-- [ADR-003: Stripe 2-Step Payment](./ADR-003-stripe-2step-payment.md)
+- [ADR-003: Stripe 2-Step Payment](ADR-003-stripe-payment-intents.md)
 
 ---
 

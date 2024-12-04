@@ -4,7 +4,7 @@
 
 The **Product Catalog** module manages the inventory of products/services offered by a tenant. It enables businesses to define pricing, taxes, units, and maintain a product catalog from which invoice line items are created.
 
-**Module Location:** `src/main/java/com/mtbs/business/product/`
+**Module Location:** `src/main/java/com/billforge/business/product/`
 
 ---
 
@@ -138,8 +138,8 @@ Content-Type: application/json
   "hsnSacCode": "9983",
   "unit": "licenses",
   "status": "ACTIVE",
-  "createdAt": "2026-05-15T10:30:00Z",
-  "updatedAt": "2026-05-15T10:30:00Z"
+  "createdAt": "2024-05-15T10:30:00Z",
+  "updatedAt": "2024-05-15T10:30:00Z"
 }
 ```
 
@@ -177,7 +177,7 @@ Authorization: Bearer <token>
       "hsnSacCode": "9983",
       "unit": "licenses",
       "status": "ACTIVE",
-      "createdAt": "2026-05-15T10:30:00Z"
+      "createdAt": "2024-05-15T10:30:00Z"
     },
     {
       "id": 2,
@@ -188,7 +188,7 @@ Authorization: Bearer <token>
       "hsnSacCode": "9983",
       "unit": "incidents",
       "status": "ACTIVE",
-      "createdAt": "2026-05-16T14:15:00Z"
+      "createdAt": "2024-05-16T14:15:00Z"
     }
   ],
   "page": 0,
@@ -262,8 +262,8 @@ Authorization: Bearer <token>
   "hsnSacCode": "9983",
   "unit": "licenses",
   "status": "ACTIVE",
-  "createdAt": "2026-05-15T10:30:00Z",
-  "updatedAt": "2026-05-15T10:30:00Z"
+  "createdAt": "2024-05-15T10:30:00Z",
+  "updatedAt": "2024-05-15T10:30:00Z"
 }
 ```
 
@@ -300,8 +300,8 @@ Content-Type: application/json
   "hsnSacCode": "9983",
   "unit": "licenses",
   "status": "ACTIVE",
-  "createdAt": "2026-05-15T10:30:00Z",
-  "updatedAt": "2026-05-26T15:45:00Z"
+  "createdAt": "2024-05-15T10:30:00Z",
+  "updatedAt": "2024-05-26T15:45:00Z"
 }
 ```
 
@@ -717,6 +717,6 @@ product.create();          // Clears cache
 ## Related Documentation
 
 - [Customer Management - Customers](./customers.md)
-- [Invoicing Module - Business Invoices](./invoicing.md)
-- [Payment Recording](./payments.md)
+- [Invoicing Module - Business Invoices](../05-platform-billing/invoice.md)
+- [Payment Recording](../05-platform-billing/payment-processing.md)
 - [Reporting & Analytics](./reporting.md)

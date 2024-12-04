@@ -4,7 +4,7 @@
 
 The **Reporting & Analytics** module provides business intelligence dashboards and reports for tenant billing data. It enables financial analysis, revenue tracking, outstanding invoices management, and monthly financial summaries.
 
-**Module Location:** `src/main/java/com/mtbs/business/report/`
+**Module Location:** `src/main/java/com/billforge/business/report/`
 
 ---
 
@@ -44,22 +44,22 @@ Analyze revenue over a specified time period with payment method breakdown.
 ### API Endpoint
 
 ```http
-GET /api/v*/reports/revenue?from=2026-05-01T00:00:00Z&to=2026-05-31T23:59:59Z
+GET /api/v*/reports/revenue?from=2024-05-01T00:00:00Z&to=2024-05-31T23:59:59Z
 
 Authorization: Bearer <token>
 ```
 
 **Query Parameters:**
-- `from` - Start date (ISO-8601 Instant, e.g., 2026-05-01T00:00:00Z)
-- `to` - End date (ISO-8601 Instant, e.g., 2026-05-31T23:59:59Z)
+- `from` - Start date (ISO-8601 Instant, e.g., 2024-05-01T00:00:00Z)
+- `to` - End date (ISO-8601 Instant, e.g., 2024-05-31T23:59:59Z)
 
 ### Response
 
 ```json
 {
   "period": {
-    "from": "2026-05-01T00:00:00Z",
-    "to": "2026-05-31T23:59:59Z"
+    "from": "2024-05-01T00:00:00Z",
+    "to": "2024-05-31T23:59:59Z"
   },
   "summary": {
     "totalRevenue": "15750.50",
@@ -143,7 +143,7 @@ Authorization: Bearer <token>
       "totalAmount": "5000.00",
       "paidAmount": "2500.00",
       "outstandingBalance": "2500.00",
-      "dueDate": "2026-04-30",
+      "dueDate": "2024-04-30",
       "daysOverdue": 26,
       "status": "OPEN"
     },
@@ -154,7 +154,7 @@ Authorization: Bearer <token>
       "totalAmount": "3000.00",
       "paidAmount": "0.00",
       "outstandingBalance": "3000.00",
-      "dueDate": "2026-04-15",
+      "dueDate": "2024-04-15",
       "daysOverdue": 41,
       "status": "OPEN"
     }
@@ -167,7 +167,7 @@ Authorization: Bearer <token>
       "totalAmount": "7500.00",
       "paidAmount": "0.00",
       "outstandingBalance": "7500.00",
-      "dueDate": "2026-06-15",
+      "dueDate": "2024-06-15",
       "daysUntilDue": 20,
       "status": "OPEN"
     }
@@ -771,7 +771,7 @@ CFO Flow:
 
 ## Related Documentation
 
-- [Payment Recording - Payments](./payments.md)
-- [Invoicing Module - Business Invoices](./invoicing.md)
+- [Payment Recording - Payments](../05-platform-billing/payment-processing.md)
+- [Invoicing Module - Business Invoices](../05-platform-billing/invoice.md)
 - [Customer Management - Customers](./customers.md)
 - [Product Catalog - Products](./products.md)

@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -289,14 +289,14 @@ upstream backend {
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mtbs-app
+  name: billforge-app
 spec:
   replicas: 3
   template:
     spec:
       containers:
       - name: app
-        image: mtbs:v1.0.0
+        image: billforge:v1.0.0
         ports:
         - containerPort: 8080
         
@@ -441,7 +441,7 @@ public class DataSourceConfig {
     public DataSource writeDataSource() {
         return DataSourceBuilder.create()
             .driverClassName("org.postgresql.Driver")
-            .url("jdbc:postgresql://db-primary.rds.amazonaws.com/mtbs")
+            .url("jdbc:postgresql://db-primary.rds.amazonaws.com/billforge")
             .username("${DB_USER}")
             .password("${DB_PASSWORD}")
             .build();
@@ -451,7 +451,7 @@ public class DataSourceConfig {
     public DataSource readDataSource() {
         return DataSourceBuilder.create()
             .driverClassName("org.postgresql.Driver")
-            .url("jdbc:postgresql://db-replica-1,db-replica-2/mtbs")
+            .url("jdbc:postgresql://db-replica-1,db-replica-2/billforge")
             .username("${DB_USER}")
             .password("${DB_PASSWORD}")
             .build();
@@ -933,7 +933,7 @@ public PaymentResponse verify(
 
 ## Related Documents
 
-- [redis-data-model.md](./redis-data-model.md) - Distributed cache structure
-- [scheduler-jobs.md](../06-scheduler/scheduler-jobs.md) - Quartz job distribution
+- [redis-data-model.md](../07-data-model/redis-data-model.md) - Distributed cache structure
+- [scheduler-jobs.md](../09-jobs/scheduler-jobs.md) - Quartz job distribution
 - [observability.md](./observability.md) - Metrics for load and scaling
-- [payment-processing.md](./payment-processing.md) - Idempotency in payments
+- [payment-processing.md](../05-platform-billing/payment-processing.md) - Idempotency in payments

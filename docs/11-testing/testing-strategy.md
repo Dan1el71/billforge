@@ -4,7 +4,7 @@
 
 The Multi-Tenant Billing System employs a comprehensive testing strategy encompassing **unit tests**, **integration tests**, **architecture tests**, and **end-to-end workflows**. This document outlines the testing philosophy, framework choices, and best practices.
 
-**Test Location:** `src/test/java/com/mtbs/`
+**Test Location:** `src/test/java/com/billforge/`
 
 ---
 
@@ -80,7 +80,7 @@ spring:
 ### Directory Structure
 
 ```
-src/test/java/com/mtbs/
+src/test/java/com/billforge/
 ├── MultiTenantBillingSystemApplicationTests.java
 │                                   # Sanity check: app starts
 │
@@ -468,7 +468,7 @@ class ArchitectureRulesTest {
     @DisplayName("Controllers should not depend on repositories")
     void controllersShouldNotAccessRepositories() {
         JavaClasses classes = new ClassFileImporter()
-            .importPackages("com.mtbs");
+            .importPackages("com.billforge");
         
         ArchRule rule = noClasses()
             .that().resideInAPackage("..controller..")
@@ -484,7 +484,7 @@ class ArchitectureRulesTest {
     @DisplayName("Modules should be loosely coupled (no cross-service calls)")
     void modulesShouldBeDecoupled() {
         JavaClasses classes = new ClassFileImporter()
-            .importPackages("com.mtbs");
+            .importPackages("com.billforge");
         
         ArchRule rule = noClasses()
             .that().resideInAPackage("..billing.service..")
@@ -500,7 +500,7 @@ class ArchitectureRulesTest {
     @DisplayName("Domain objects should not depend on framework")
     void domainObjectsShouldBeFrameworkAgnostic() {
         JavaClasses classes = new ClassFileImporter()
-            .importPackages("com.mtbs..entity");
+            .importPackages("com.billforge..entity");
         
         ArchRule rule = noClasses()
             .should().dependOnClassesThat().resideInAPackage("org.springframework..");
@@ -739,4 +739,4 @@ jobs:
 
 - [Multi-Tenancy Isolation Tests](./tenant-isolation-tests.md)
 - [Billing Flow Integration Tests](./billing-flow-tests.md)
-- [Architecture & Design Patterns](../backend/01-foundation/system-design.md)
+- [Architecture & Design Patterns](../01-architecture/system-design.md)

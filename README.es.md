@@ -101,7 +101,6 @@ inquilinos, flujo de facturación y webhook de Stripe. La CI levanta ambos servi
 |---|---|
 | ![Vista general](docs/screenshots/01-api-overview.png) | ![Detalle](docs/screenshots/02-endpoint.png) |
 
-![Ejecutando una petición](docs/screenshots/billforge-flow.gif)
 
 El documento OpenAPI se sirve en `/api-docs` y la referencia interactiva en
 `/swagger-ui/index.html` con la aplicación en marcha.

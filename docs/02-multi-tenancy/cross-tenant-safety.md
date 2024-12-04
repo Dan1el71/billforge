@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-14
+date: 2024-09-20
 author: Daniel Rangel
 status: CRITICAL - Production Ready
 tags:
@@ -360,10 +360,10 @@ invoiceRepository.save(invoice);
 // Database row:
 {
   "id": 1,
-  "invoice_number": "INV-2026-0001",
-  "created_at": "2026-05-14T14:30:00Z",
+  "invoice_number": "INV-2024-0001",
+  "created_at": "2024-05-14T14:30:00Z",
   "created_by": 123,              // ← User ID recorded
-  "updated_at": "2026-05-14T14:30:00Z",
+  "updated_at": "2024-05-14T14:30:00Z",
   "updated_by": 123
 }
 
@@ -374,7 +374,7 @@ invoiceRepository.save(invoice);
 // Database row after update:
 {
   ...
-  "updated_at": "2026-05-14T15:45:00Z",
+  "updated_at": "2024-05-14T15:45:00Z",
   "updated_by": 456               // ← Different user ID
 }
 ```
@@ -405,7 +405,7 @@ Example audit entry:
   "action": "UPDATE",
   "old_values": { "status": "OPEN" },
   "new_values": { "status": "PAID" },
-  "created_at": "2026-05-14T15:45:00Z",
+  "created_at": "2024-05-14T15:45:00Z",
   "created_by": 123
 }
 ```

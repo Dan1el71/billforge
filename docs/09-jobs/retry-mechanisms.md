@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-16
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -245,27 +245,27 @@ PaymentIntentResult order = paymentGateway.createPaymentIntent(
 ### Example Scenario
 
 ```
-2026-05-15 14:00: Tenant upgrades to PRO
-  Invoice: INV-2026-00123, Amount: $500
+2024-05-15 14:00: Tenant upgrades to PRO
+  Invoice: INV-2024-00123, Amount: $500
   Payment attempt 0:
-    paymentService.processPayment(INV-2026-00123)
+    paymentService.processPayment(INV-2024-00123)
     idempotencyKey: "pay-456-00123"
     Stripe PaymentIntent: ORD-789
     stripePaymentIntentId stored in Payment table
     Status: PENDING
     
-2026-05-15 14:05: User completes checkout, but network timeout
+2024-05-15 14:05: User completes checkout, but network timeout
   Signature verification fails
   Status remains PENDING
   
-2026-05-15 14:10: Stripe webhook (payment.failed event)
+2024-05-15 14:10: Stripe webhook (payment.failed event)
   handlePaymentFailure() called
   Status: FAILED
   failureCode: "network_error"
   retryCount: 0
-  nextRetryAt: 2026-05-15 15:10 (1 hour later)
+  nextRetryAt: 2024-05-15 15:10 (1 hour later)
   
-2026-05-15 15:10: PaymentRetryJob runs
+2024-05-15 15:10: PaymentRetryJob runs
   nextRetryAt < now? YES
   retryCount < 3? YES
   retryFailedPayment(paymentId)
@@ -274,13 +274,13 @@ PaymentIntentResult order = paymentGateway.createPaymentIntent(
     Status: PENDING (reset for retry)
     retryCount: 1
     
-2026-05-15 15:20: User retries payment manually
+2024-05-15 15:20: User retries payment manually
   Signs new order ORD-790
   Payment succeeds
   Status: SUCCEEDED
   Invoice status: PAID
   
-2026-05-15 16:10: PaymentRetryJob runs again
+2024-05-15 16:10: PaymentRetryJob runs again
   nextRetryAt: null (payment succeeded)
   Skip this payment
 ```
@@ -352,7 +352,7 @@ if (outboxEvent.getStatus() != OutboxStatus.FAILED_PERMANENTLY) {
 ### Example Scenario
 
 ```
-2026-05-15 14:00: Invoice created event
+2024-05-15 14:00: Invoice created event
   OutboxEvent saved to outbox_events table
   eventType: "InvoiceCreatedEvent"
   status: PENDING
@@ -365,25 +365,25 @@ OutboxEventProcessor polls immediately:
   Error classified as TRANSIENT
   status: FAILED (will be retried)
   retryCount: 1
-  nextRetryAt: 2026-05-15 14:01 (1 minute later)
+  nextRetryAt: 2024-05-15 14:01 (1 minute later)
   
-2026-05-15 14:01: OutboxEventProcessor polls
+2024-05-15 14:01: OutboxEventProcessor polls
   Found event with nextRetryAt < now
   Publish again
   Email service STILL down
   Error classified as TRANSIENT
   status: FAILED
   retryCount: 2
-  nextRetryAt: 2026-05-15 14:06 (5 minutes later)
+  nextRetryAt: 2024-05-15 14:06 (5 minutes later)
   
-2026-05-15 14:06: OutboxEventProcessor polls
+2024-05-15 14:06: OutboxEventProcessor polls
   Publish again
   Email service restored
   Listeners succeed
   status: PROCESSED
   processedAt: now
   
-2026-05-15 03:00 (next day): Cleanup job runs
+2024-05-15 03:00 (next day): Cleanup job runs
   DELETE outbox_events WHERE status='PROCESSED' AND processedAt < (now - 30 days)
   Removes stale processed events
 ```

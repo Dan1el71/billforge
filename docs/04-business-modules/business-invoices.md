@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-14
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -170,8 +170,8 @@ business:
         "taxPercentage": 0
       }
     ],
-    "createdAt": "2026-05-14T14:30:00Z",
-    "updatedAt": "2026-05-14T14:30:00Z"
+    "createdAt": "2024-05-14T14:30:00Z",
+    "updatedAt": "2024-05-14T14:30:00Z"
   },
   "message": "Invoice created successfully"
 }
@@ -227,9 +227,9 @@ GET /api/v1/business-invoices?customerId=42&status=OPEN&page=0&size=20&sort=crea
         "status": "OPEN",
         "totalAmount": 64900.00,
         "currency": "USD",
-        "dueDate": "2026-06-13T00:00:00Z",
+        "dueDate": "2024-06-13T00:00:00Z",
         "paidAt": null,
-        "createdAt": "2026-05-14T14:30:00Z"
+        "createdAt": "2024-05-14T14:30:00Z"
       }
     ],
     "totalElements": 1,
@@ -268,7 +268,7 @@ GET /api/v1/business-invoices?customerId=42&status=OPEN&page=0&size=20&sort=crea
     "totalAmount": 64900.00,
     "currency": "USD",
     "notes": "Invoice for March consulting services",
-    "dueDate": "2026-06-13T00:00:00Z",
+    "dueDate": "2024-06-13T00:00:00Z",
     "paidAt": null,
     "stripePaymentLinkId": null,
     "items": [
@@ -282,8 +282,8 @@ GET /api/v1/business-invoices?customerId=42&status=OPEN&page=0&size=20&sort=crea
         "taxAmount": 4500.00
       }
     ],
-    "createdAt": "2026-05-14T14:30:00Z",
-    "updatedAt": "2026-05-14T15:45:00Z"
+    "createdAt": "2024-05-14T14:30:00Z",
+    "updatedAt": "2024-05-14T15:45:00Z"
   },
   "message": "Invoice fetched successfully"
 }
@@ -415,7 +415,7 @@ Or for custom item:
     "invoiceNumber": "BINV-456-202605-0001",
     "status": "OPEN",
     "totalAmount": 64900.00,
-    "dueDate": "2026-06-13T00:00:00Z",
+    "dueDate": "2024-06-13T00:00:00Z",
     "items": [...]
   },
   "message": "Invoice finalized successfully"
@@ -571,7 +571,7 @@ Content-Length: 45823
   "amount": 32450.00,
   "method": "BANK_TRANSFER",
   "notes": "UTR 123456789",
-  "paidAt": "2026-05-13T18:30:00Z"
+  "paidAt": "2024-05-13T18:30:00Z"
 }
 ```
 
@@ -585,8 +585,8 @@ Content-Length: 45823
     "amount": 32450.00,
     "method": "BANK_TRANSFER",
     "notes": "UTR 123456789",
-    "paidAt": "2026-05-13T18:30:00Z",
-    "createdAt": "2026-05-14T15:45:00Z"
+    "paidAt": "2024-05-13T18:30:00Z",
+    "createdAt": "2024-05-14T15:45:00Z"
   },
   "message": "Payment recorded successfully"
 }
@@ -631,8 +631,8 @@ Content-Length: 45823
       "amount": 32450.00,
       "method": "BANK_TRANSFER",
       "notes": "UTR 123456789",
-      "paidAt": "2026-05-13T18:30:00Z",
-      "createdAt": "2026-05-14T14:30:00Z"
+      "paidAt": "2024-05-13T18:30:00Z",
+      "createdAt": "2024-05-14T14:30:00Z"
     },
     {
       "id": 202,
@@ -640,8 +640,8 @@ Content-Length: 45823
       "amount": 32450.00,
       "method": "STRIPE_LINK",
       "notes": null,
-      "paidAt": "2026-05-14T15:45:00Z",
-      "createdAt": "2026-05-14T15:45:00Z"
+      "paidAt": "2024-05-14T15:45:00Z",
+      "createdAt": "2024-05-14T15:45:00Z"
     }
   ],
   "message": "Payments fetched successfully"
@@ -899,7 +899,7 @@ public class BusinessInvoiceService {
 
 ## Error Handling
 
-See [error-handling.md](./error-handling.md#business-error-codes) for complete error list.
+See [error-handling.md](../06-api/error-handling.md) for complete error list.
 
 **Common errors:**
 

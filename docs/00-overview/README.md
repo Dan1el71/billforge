@@ -1,19 +1,19 @@
-# Multi-Tenant Billing System (Billforge)
+# Billforge
 
 ## Enterprise-Grade SaaS Billing Platform
 
-**Version:** 0.0.1  
-**Last Updated:** May 2026  
-**Status:** Production Ready  
-**License:** Proprietary  
+**Version:** 1.0.0  
+**Last Updated:** September 2024  
+**Status:** Release 1.0  
+**License:** MIT  
 
 ---
 
 ## 🎯 What is Billforge?
 
-Multi-Tenant Billing System (Billforge) is an **enterprise-grade SaaS billing platform** designed to power subscription-based businesses. It provides a complete billing infrastructure for managing subscriptions, payments, invoicing, and multi-tenant operations at scale.
+Billforge is an **enterprise-grade SaaS billing platform** designed to power subscription-based businesses. It provides a complete billing infrastructure for managing subscriptions, payments, invoicing, and multi-tenant operations at scale.
 
-Built with **Spring Boot 3.4.3** and **Java 17**, Billforge implements industry-standard patterns for security, reliability, and scalability:
+Built with **Spring Boot 3.3.6** and **Java 21**, Billforge implements industry-standard patterns for security, reliability, and scalability:
 
 - 🔐 **Secure Multi-Tenancy** - Complete tenant isolation with schema-per-tenant architecture
 - 💳 **Payment Processing** - Stripe integration with PaymentIntent payment verification
@@ -21,14 +21,14 @@ Built with **Spring Boot 3.4.3** and **Java 17**, Billforge implements industry-
 - 📧 **Notification System** - Event-driven email delivery with retry logic
 - 📈 **Observable & Scalable** - Structured logging, distributed tracing, horizontal scaling
 - 🔄 **Reliable Event Processing** - Transactional Outbox Pattern for at-least-once delivery
-- 🛡️ **Enterprise Security** - JWT authentication, webhook HMAC verification, rate limiting
+- 🛡️ **Enterprise Security** - JWT authentication, Stripe webhook signature verification, rate limiting
 
 ---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **Java 17+**
+- **Java 21+**
 - **PostgreSQL 14+**
 - **Redis 6.0+**
 - **Docker** (optional, for containerized deployment)
@@ -60,7 +60,7 @@ mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=dev"
 
 ```bash
 # Build Docker image
-docker build -t mtbs:latest .
+docker build -t billforge:latest .
 
 # Run with Docker Compose
 docker-compose up -d
@@ -212,7 +212,7 @@ docker-compose up -d
 ### Module Structure
 
 ```
-src/main/java/com/mtbs/
+src/main/java/com/billforge/
 ├── auth/              # Authentication & Authorization
 │   ├── controller/    # Auth endpoints
 │   ├── service/       # JWT, token management
@@ -362,7 +362,7 @@ mvn verify
 ## 🤝 Contributing
 
 ### Code Standards
-- **Java 17 best practices** - Records, sealed classes, pattern matching
+- **Java 21 best practices** - Records, sealed classes, pattern matching
 - **Spring Framework conventions** - Component scanning, dependency injection
 - **Test-Driven Development** - All features require unit + integration tests
 - **Documentation** - Every public class/method documented with JavaDoc
@@ -394,7 +394,7 @@ mvn verify
 - **Technical Lead:** Daniel Rangel
 - **Engineering Team:** [Your Team]
 - **Support Email:** support@example.com
-- **Slack Channel:** #mtbs-engineering
+- **Slack Channel:** #billforge-engineering
 
 ---
 
@@ -416,6 +416,6 @@ Billforge is proprietary software. All rights reserved.
 
 ---
 
-**Last Updated:** May 2026  
+**Last Updated:** September 2024  
 **Maintained By:** Engineering Team  
 **Version:** 1.0  

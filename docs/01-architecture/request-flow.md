@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -157,7 +157,7 @@ clientIp=192.168.1.100
 
 **Log line example:**
 ```
-2026-04-24T10:15:30.123Z [INFO] requestId=abc123 traceId=xyz789 spanId=span789 method=GET uri=/api/v1/billing/invoices clientIp=192.168.1.100 durationMs=245 status=200 -> Request completed
+2024-04-24T10:15:30.123Z [INFO] requestId=abc123 traceId=xyz789 spanId=span789 method=GET uri=/api/v1/billing/invoices clientIp=192.168.1.100 durationMs=245 status=200 -> Request completed
 ```
 
 ### Layer 3: Spring Security Filters (Multiple)
@@ -431,7 +431,7 @@ Spring converts to JSON:
     "pageSize": 10
   },
   "message": "Invoices retrieved",
-  "timestamp": "2026-04-24T10:15:30.245Z"
+  "timestamp": "2024-04-24T10:15:30.245Z"
 }
 ```
 
@@ -490,7 +490,7 @@ HTTP/1.1 403 Forbidden
   "success": false,
   "error": "Access denied",
   "errorCode": "AUTH_0003",
-  "timestamp": "2026-04-24T10:15:30.250Z"
+  "timestamp": "2024-04-24T10:15:30.250Z"
 }
 ```
 
@@ -510,7 +510,7 @@ finally {
 
 **Final log line:**
 ```
-2026-04-24T10:15:30.250Z [INFO] requestId=abc123 traceId=xyz789 spanId=span789 tenantId=456 userId=123 role=OWNER method=GET uri=/api/v1/billing/invoices status=200 durationMs=127 -> Request completed
+2024-04-24T10:15:30.250Z [INFO] requestId=abc123 traceId=xyz789 spanId=span789 tenantId=456 userId=123 role=OWNER method=GET uri=/api/v1/billing/invoices status=200 durationMs=127 -> Request completed
 ```
 
 HTTP response sent to client with 200 or 403 status + JSON body + request/trace ID headers.

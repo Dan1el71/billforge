@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -288,7 +288,7 @@ public class PlanService {
   "maxUsers": 100,
   "active": true,
   "createdAt": "2025-01-01T00:00:00Z",
-  "updatedAt": "2026-05-17T14:30:00Z"
+  "updatedAt": "2024-05-17T14:30:00Z"
 }
 ```
 
@@ -800,6 +800,6 @@ alerts:
 
 ## Related Documents
 
-- [scalability.md](./scalability.md) - Distributed caching for scale
-- [performance.md](./performance.md) - Cache performance impact
-- [configuration-reference.md](./configuration-reference.md) - Redis configuration
+- [scalability.md](../10-non-functional/scalability.md) - Distributed caching for scale
+- [performance.md](../performance.md) - Cache performance impact
+- [configuration-reference.md](../10-non-functional/configuration-reference.md) - Redis configuration

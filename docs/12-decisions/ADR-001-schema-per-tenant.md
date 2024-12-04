@@ -1,6 +1,6 @@
 # ADR-001: Schema-Per-Tenant Multi-Tenancy Strategy
 
-**Date:** May 2026  
+**Date:** September 2024  
 **Status:** Accepted  
 **Decision Maker:** Architecture Team  
 **Stakeholders:** Backend Team, DevOps, Security, Product
@@ -17,7 +17,7 @@ The Multi-Tenant Billing System needs to isolate tenant data securely. Three app
 
 **Key Requirements:**
 - ✅ Complete data isolation (no accidental data leaks)
-- ✅ Compliance-ready (GDPR, SOC2)
+- ✅ Designed for regulated workloads
 - ✅ Performance at scale (100k+ tenants)
 - ✅ Reasonable operational complexity
 - ✅ Cost-efficient infrastructure
@@ -137,7 +137,7 @@ Instance 3: gamma_llc_db
 ### Rationale
 
 1. **Security (Critical)** - Physical schema isolation eliminates accidental data leaks
-2. **Compliance** - Audit trails are per-schema (GDPR compliance easier)
+2. **Compliance** - Audit trails are per-schema (data-protection-friendly audit trails easier)
 3. **Operational Feasibility** - Automation (Flyway) handles schema management
 4. **Performance** - Better than RLS (no WHERE clause needed), cheaper than DB-per-tenant
 5. **Developer Experience** - Clear isolation reduces bugs
@@ -428,7 +428,7 @@ void eachTenantHasSeparateSchema() {
 ## Related ADRs
 
 - [ADR-002: Outbox Pattern for Reliable Event Delivery](./ADR-002-outbox-pattern.md)
-- [ADR-003: Stripe 2-Step Payment Verification](./ADR-003-stripe-2step-payment.md)
+- [ADR-003: Stripe 2-Step Payment Verification](ADR-003-stripe-payment-intents.md)
 
 ---
 

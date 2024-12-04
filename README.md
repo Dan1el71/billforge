@@ -101,7 +101,6 @@ the Stripe webhook. CI provides both services; locally, start them with
 |---|---|
 | ![API overview](docs/screenshots/01-api-overview.png) | ![Endpoint detail](docs/screenshots/02-endpoint.png) |
 
-![Running a request](docs/screenshots/billforge-flow.gif)
 
 The OpenAPI document is served at `/api-docs` and the interactive reference at
 `/swagger-ui/index.html` once the application is running.
@@ -174,8 +173,8 @@ docs/             13 sections: architecture, data model, events, jobs, decisions
 - Stripe is the only payment provider; there is no card vaulting.
 - No web interface; the API is the product surface.
 - Email goes to SMTP directly, without a delivery provider or bounce handling.
-- Some roadmap items from the original notes (observability stack, usage-based billing,
-  Kubernetes manifests) are not built.
+- Kubernetes manifests and a live deployment are not included; the local Compose stack is the
+  supported runtime.
 
 ## License
 

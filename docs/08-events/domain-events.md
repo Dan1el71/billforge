@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -105,7 +105,7 @@ If crash between outbox write and event publish: outbox still has event, retry l
 ```yaml
 spring:
   application:
-    name: mtbs
+    name: billforge
   
   # ApplicationEvent propagation
   context:
@@ -675,5 +675,5 @@ public class EventHandlingIntegrationTest {
 
 - [notification-events.md](./notification-events.md) - Specific notification event types
 - [notification-module.md](./notification-module.md) - How events trigger notifications
-- [outbox-pattern.md](../arch/OUTBOX_PATTERN_GUIDE.md) - Detailed Outbox Pattern explanation
-- [observability.md](./observability.md) - Event logging and tracing
+- [outbox-pattern.md](../01-architecture/outbox-pattern.md) - Detailed Outbox Pattern explanation
+- [observability.md](../10-non-functional/observability.md) - Event logging and tracing

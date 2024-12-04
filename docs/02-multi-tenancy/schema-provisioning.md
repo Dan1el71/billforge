@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-18
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -273,7 +273,7 @@ Each new tenant schema receives the full set of 20 migrations:
 | V8 | Create invoices | `invoices` |
 | V9-V20 | Domain tables & indices | payments, outbox, line_items, etc. |
 
-See [multi-tenancy-strategy.md](../01-authentication/multi-tenancy-strategy.md) for the complete migration inventory.
+See [multi-tenancy-strategy.md](multi-tenancy-strategy.md) for the complete migration inventory.
 
 **Default roles seeded:** Migrations V1-V4 include SQL INSERT statements that create OWNER, ADMIN, EMPLOYEE default roles per tenant schema immediately after schema creation. Each tenant schema starts with a clean, pre-populated RBAC model.
 
@@ -343,13 +343,13 @@ RECOVERY OPTIONS:
 
 | Component | Location | Tag | Purpose |
 |-----------|----------|-----|---------|
-| TenantFlywayMigrationService | [src/main/java/com/mtbs/tenant/service/TenantFlywayMigrationService.java](../../src/main/java/com/mtbs/tenant/service/TenantFlywayMigrationService.java) | [TEN-12] | Schema provisioning orchestration |
-| FlywayConfig | [src/main/java/com/mtbs/config/FlywayConfig.java](../../src/main/java/com/mtbs/config/FlywayConfig.java) | [CFG-4] | Public schema migrations on startup |
-| SignupService | [src/main/java/com/mtbs/auth/service/SignupService.java](../../src/main/java/com/mtbs/auth/service/SignupService.java) | [AUTH-16] | Signup orchestration (calls provisioning) |
-| Tenant Entity | [src/main/java/com/mtbs/tenant/entity/Tenant.java](../../src/main/java/com/mtbs/tenant/entity/Tenant.java) | [TEN-1] | Stores schemaName (unique) |
+| TenantFlywayMigrationService | [src/main/java/com/billforge/tenant/service/TenantFlywayMigrationService.java](../../src/main/java/com/billforge/tenant/service/TenantFlywayMigrationService.java) | [TEN-12] | Schema provisioning orchestration |
+| FlywayConfig | [src/main/java/com/billforge/config/FlywayConfig.java](../../src/main/java/com/billforge/tenant/config/FlywayConfig.java) | [CFG-4] | Public schema migrations on startup |
+| SignupService | [src/main/java/com/billforge/auth/service/SignupService.java](../../src/main/java/com/billforge/auth/service/SignupService.java) | [AUTH-16] | Signup orchestration (calls provisioning) |
+| Tenant Entity | [src/main/java/com/billforge/tenant/entity/Tenant.java](../../src/main/java/com/billforge/tenant/entity/Tenant.java) | [TEN-1] | Stores schemaName (unique) |
 | Tenant Migrations | [src/main/resources/db/migration/tenant/](../../src/main/resources/db/migration/tenant/) | [SQL-2-*] | V1-V20 migration scripts |
 | Public Migrations | [src/main/resources/db/migration/public/](../../src/main/resources/db/migration/public/) | [SQL-1-*] | V1-V8 public schema fixtures |
-| Test Helper | [src/test/java/com/mtbs/support/TestSchemaHelper.java](../../src/test/java/com/mtbs/support/TestSchemaHelper.java) | [TST-1] | Schema provisioning for integration tests |
+| Test Helper | [src/test/java/com/billforge/support/TestSchemaHelper.java](../../src/test/java/com/billforge/support/TestSchemaHelper.java) | [TST-1] | Schema provisioning for integration tests |
 
 
 ## Rules & Constraints
@@ -548,8 +548,8 @@ void cleanup() {
 
 ## Related Documents
 
-- [multi-tenancy-strategy.md](../01-authentication/multi-tenancy-strategy.md) - Schema naming, strategy, 3-step signup flow
-- [tenant-context-lifecycle.md](../01-authentication/tenant-context-lifecycle.md) - TenantContext thread-local routing to correct schema
-- [system-design.md](../02-core-infrastructure/system-design.md) - Overall architecture, module interaction
-- [request-flow.md](../01-authentication/request-flow.md) - Filter chain, where TenantContext is set
+- [multi-tenancy-strategy.md](multi-tenancy-strategy.md) - Schema naming, strategy, 3-step signup flow
+- [tenant-context-lifecycle.md](tenant-context-lifecycle.md) - TenantContext thread-local routing to correct schema
+- [system-design.md](../01-architecture/system-design.md) - Overall architecture, module interaction
+- [request-flow.md](../01-architecture/request-flow.md) - Filter chain, where TenantContext is set
 - PROJECT_CODEBASE_REFERENCE.txt - Complete code inventory (see tags TEN-1, TEN-12, CFG-4, AUTH-16)

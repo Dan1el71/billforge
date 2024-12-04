@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-14
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -88,8 +88,8 @@ business:
 {
   "amount": 32450.00,
   "method": "BANK_TRANSFER",
-  "notes": "UTR 123456789 dated 2026-05-13",
-  "paidAt": "2026-05-13T18:30:00Z"
+  "notes": "UTR 123456789 dated 2024-05-13",
+  "paidAt": "2024-05-13T18:30:00Z"
 }
 ```
 
@@ -103,10 +103,10 @@ business:
     "amount": 32450.00,
     "currency": "USD",
     "method": "BANK_TRANSFER",
-    "notes": "UTR 123456789 dated 2026-05-13",
-    "paidAt": "2026-05-13T18:30:00Z",
+    "notes": "UTR 123456789 dated 2024-05-13",
+    "paidAt": "2024-05-13T18:30:00Z",
     "stripePaymentLinkId": null,
-    "createdAt": "2026-05-14T15:45:00Z"
+    "createdAt": "2024-05-14T15:45:00Z"
   },
   "message": "Payment recorded successfully"
 }
@@ -140,8 +140,8 @@ POST /api/v1/business-payments/1
 {
   "amount": 32450.00,
   "method": "CHEQUE",
-  "notes": "Cheque #42 dated 2026-05-01",
-  "paidAt": "2026-05-01T10:00:00Z"    ← Payment date ≠ Today
+  "notes": "Cheque #42 dated 2024-05-01",
+  "paidAt": "2024-05-01T10:00:00Z"    ← Payment date ≠ Today
 }
 ```
 
@@ -179,9 +179,9 @@ POST /api/v1/business-payments/1
       "currency": "USD",
       "method": "BANK_TRANSFER",
       "notes": "UTR 123456789",
-      "paidAt": "2026-05-13T18:30:00Z",
+      "paidAt": "2024-05-13T18:30:00Z",
       "stripePaymentLinkId": null,
-      "createdAt": "2026-05-14T14:30:00Z"
+      "createdAt": "2024-05-14T14:30:00Z"
     },
     {
       "id": 202,
@@ -190,9 +190,9 @@ POST /api/v1/business-payments/1
       "currency": "USD",
       "method": "BANK_TRANSFER",
       "notes": "UTR 987654321",
-      "paidAt": "2026-05-14T09:15:00Z",
+      "paidAt": "2024-05-14T09:15:00Z",
       "stripePaymentLinkId": null,
-      "createdAt": "2026-05-14T15:45:00Z"
+      "createdAt": "2024-05-14T15:45:00Z"
     }
   ],
   "message": "Payments fetched successfully"
@@ -205,8 +205,8 @@ POST /api/v1/business-payments/1
 Invoice: BINV-456-202605-0001 (Total: $64,900)
 
 Payment History:
-  2026-05-13 18:30  |  $32,450  |  BANK_TRANSFER  |  UTR 123456789
-  2026-05-14 09:15  |  $32,450  |  BANK_TRANSFER  |  UTR 987654321
+  2024-05-13 18:30  |  $32,450  |  BANK_TRANSFER  |  UTR 123456789
+  2024-05-14 09:15  |  $32,450  |  BANK_TRANSFER  |  UTR 987654321
   ───────────────────────────────────────────────────
   Total Received:   $64,900    Status: PAID
 ```
@@ -497,7 +497,7 @@ public class BusinessPaymentService {
   "amount": 5000.00,
   "method": "CASH",
   "notes": "Collected by Raj at site visit",
-  "paidAt": "2026-05-14T14:00:00Z"
+  "paidAt": "2024-05-14T14:00:00Z"
 }
 ```
 
@@ -510,7 +510,7 @@ public class BusinessPaymentService {
   "amount": 32450.00,
   "method": "BANK_TRANSFER",
   "notes": "UTR 123456789 | Acme Corp Pvt Ltd | AXIS Bank",
-  "paidAt": "2026-05-13T09:30:00Z"
+  "paidAt": "2024-05-13T09:30:00Z"
 }
 ```
 
@@ -527,8 +527,8 @@ public class BusinessPaymentService {
 {
   "amount": 32450.00,
   "method": "CHEQUE",
-  "notes": "Cheque #42 | First National Bank | Dated 2026-05-15",
-  "paidAt": "2026-05-14T16:00:00Z"
+  "notes": "Cheque #42 | First National Bank | Dated 2024-05-15",
+  "paidAt": "2024-05-14T16:00:00Z"
 }
 ```
 
@@ -546,7 +546,7 @@ public class BusinessPaymentService {
 {
   "amount": 32450.00,
   "method": "STRIPE_LINK",
-  "paidAt": "2026-05-14T15:45:00Z"
+  "paidAt": "2024-05-14T15:45:00Z"
 }
 ```
 
@@ -598,7 +598,7 @@ public class BusinessPaymentService {
 
 ## Error Handling
 
-See [error-handling.md](./error-handling.md#business-error-codes) for complete error list.
+See [error-handling.md](../06-api/error-handling.md) for complete error list.
 
 **Common errors:**
 

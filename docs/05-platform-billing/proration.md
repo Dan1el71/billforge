@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -118,8 +118,8 @@ chargeAmount = targetPlanCyclePrice - credit
 
 **Setup:**
 ```
-Current: MONTHLY $299, created 2026-05-17, period ends 2026-06-16 (30 days)
-Today: 2026-05-27 (10 days passed, 20 days remaining)
+Current: MONTHLY $299, created 2024-05-17, period ends 2024-06-16 (30 days)
+Today: 2024-05-27 (10 days passed, 20 days remaining)
 Target: ANNUAL $2999, MONTHLY billing cycle requested
 ```
 
@@ -142,8 +142,8 @@ Preview returns:
   "chargeAmount": 2799.67,
   "amountCents": 279967,  // for Stripe
   "noPaymentRequired": false,
-  "newPeriodStart": "2026-05-27T14:30:00Z",
-  "newPeriodEnd": "2026-05-26T14:30:00Z" (1 year later)
+  "newPeriodStart": "2024-05-27T14:30:00Z",
+  "newPeriodEnd": "2024-05-26T14:30:00Z" (1 year later)
 }
 ```
 
@@ -188,7 +188,7 @@ chargeAmount = 299 - 0 = $299.00
 **Setup:**
 ```
 Current: TRIALING status, planId = 1 (FREE plan during trial)
-         Trial ends 2026-06-16, today is 2026-05-27 (20 days left)
+         Trial ends 2024-06-16, today is 2024-05-27 (20 days left)
 Target: MONTHLY $299
 ```
 
@@ -223,7 +223,7 @@ chargeAmount = $0, user gets FREE immediately.
 Days paid on ANNUAL are sunk (no refund).
 
 If atPeriodEnd=true (scheduled downgrade):
-User keeps ANNUAL until 2026-12-14, then FREE next period.
+User keeps ANNUAL until 2024-12-14, then FREE next period.
 ```
 
 ---
@@ -359,7 +359,7 @@ charge (20 days) = 9.966667 × 20 = 199.33333 → 199.33 (2dp)  (CORRECT)
 
 **Consequence:**
 ```
-Feb subscription created 2026-02-15, 28 days in Feb
+Feb subscription created 2024-02-15, 28 days in Feb
 User perceives: "I get 28 days of Feb, not 30" (edge case complaint)
 System: "You get $299 for 30 days worth, period"
 ```

@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -262,7 +262,7 @@ public class SubscriptionCreatedEvent extends DomainEvent {
   </tr>
   <tr>
     <td>Price</td>
-    <td>$[[${#numbers.formatDecimal(planPrice, 0, 'INDIAN', 2)}]] / [[${billingCycle}]]</td>
+    <td>$[[${#numbers.formatDecimal(planPrice, 0, 'US', 2)}]] / [[${billingCycle}]]</td>
   </tr>
   <tr>
     <td>Trial Period</td>
@@ -318,7 +318,7 @@ public class PlanUpgradedEvent extends DomainEvent {
   </tr>
   <tr>
     <td>Charge Amount</td>
-    <td>$[[${#numbers.formatDecimal(chargeAmount, 0, 'INDIAN', 2)}]]</td>
+    <td>$[[${#numbers.formatDecimal(chargeAmount, 0, 'US', 2)}]]</td>
   </tr>
 </table>
 <p><a href="https://app.example.com/invoices/[[${invoiceId}]]">View Invoice</a></p>
@@ -440,7 +440,7 @@ public class PaymentCapturedEvent extends DomainEvent {
   </tr>
   <tr>
     <td>Amount</td>
-    <td>$[[${#numbers.formatDecimal(amount, 0, 'INDIAN', 2)}]]</td>
+    <td>$[[${#numbers.formatDecimal(amount, 0, 'US', 2)}]]</td>
   </tr>
   <tr>
     <td>Payment ID</td>
@@ -481,7 +481,7 @@ public class PaymentFailedEvent extends DomainEvent {
 **Email Template:** `payment-failed.html`
 ```html
 <h2>Payment Failed</h2>
-<p>Your payment of $[[${#numbers.formatDecimal(amount, 0, 'INDIAN', 2)}]] could not be processed.</p>
+<p>Your payment of $[[${#numbers.formatDecimal(amount, 0, 'US', 2)}]] could not be processed.</p>
 <p>Reason: [[${failureReason}]]</p>
 <p>Please <a href="https://app.example.com/billing/retry">try again</a> or <a href="[[${supportUrl}]]">contact support</a>.</p>
 ```
@@ -519,7 +519,7 @@ public class InvoiceGeneratedEvent extends DomainEvent {
 <table border="1">
   <tr>
     <td>Amount Due</td>
-    <td>$[[${#numbers.formatDecimal(amount, 0, 'INDIAN', 2)}]]</td>
+    <td>$[[${#numbers.formatDecimal(amount, 0, 'US', 2)}]]</td>
   </tr>
   <tr>
     <td>Due Date</td>
@@ -557,7 +557,7 @@ public class InvoiceOverdueEvent extends DomainEvent {
 ```html
 <h2>Payment Overdue</h2>
 <p>Invoice [[${invoiceId}]] is now [[${daysOverdue}]] days overdue.</p>
-<p>Amount Due: $[[${#numbers.formatDecimal(amountDue, 0, 'INDIAN', 2)}]]</p>
+<p>Amount Due: $[[${#numbers.formatDecimal(amountDue, 0, 'US', 2)}]]</p>
 <p>Original Due Date: [[${#dates.format(originalDueDate, 'MMM dd, yyyy')}]]</p>
 <p><a href="https://app.example.com/invoices/[[${invoiceId}]]/pay">Pay Now</a></p>
 ```
@@ -743,4 +743,4 @@ All notification emails include unsubscribe link:
 
 - [domain-events.md](./domain-events.md) - General event publishing and handling
 - [notification-module.md](./notification-module.md) - Notification system architecture
-- [observability.md](./observability.md) - Logging notification events
+- [observability.md](../10-non-functional/observability.md) - Logging notification events

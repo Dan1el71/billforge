@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-22
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -19,8 +19,8 @@ tags:
 | Category | Technology | Version | Purpose |
 |----------|-----------|---------|---------|
 | **Runtime** | Java | 17 LTS | Application runtime |
-| **Framework** | Spring Boot | 3.4.3 | Web application framework |
-| **Language Features** | Java 17 | Records, Sealed Classes | Modern language features |
+| **Framework** | Spring Boot | 3.3.6 | Web application framework |
+| **Language Features** | Java 21 | Records, Sealed Classes | Modern language features |
 | **Build Tool** | Maven | 3.8+ | Dependency management, build |
 | **Database** | PostgreSQL | 14+ | Primary data store |
 | **Cache** | Redis | 6.0+ | In-memory cache & sessions |
@@ -37,11 +37,11 @@ tags:
 
 ### Spring Boot Ecosystem
 
-#### Spring Boot 3.4.3 (Parent)
+#### Spring Boot 3.3.6 (Parent)
 ```xml
 <groupId>org.springframework.boot</groupId>
 <artifactId>spring-boot-starter-parent</artifactId>
-<version>3.4.3</version>
+<version>3.3.6</version>
 ```
 
 **Spring Boot Starters Used:**
@@ -230,7 +230,7 @@ maxmemory: 10gb                 // 10GB memory limit
 |----------|-------|-------|
 | **Algorithm** | HS256 (HMAC-SHA256) | Symmetric key signing |
 | **Secret Key** | 256+ bits | ${JWT_SECRET} env var |
-| **Issuer (iss)** | mtbs-app | Application identifier |
+| **Issuer (iss)** | billforge-app | Application identifier |
 | **Subject (sub)** | userId | User unique ID |
 | **Access Token TTL** | 15 minutes | Short-lived |
 | **Refresh Token TTL** | 7 days | Longer-lived |
@@ -240,7 +240,7 @@ maxmemory: 10gb                 // 10GB memory limit
 **Custom Claims:**
 ```json
 {
-  "iss": "mtbs-app",
+  "iss": "billforge-app",
   "sub": "user-123",
   "tenantId": "t1",
   "roles": ["ADMIN", "USER"],
@@ -349,7 +349,7 @@ spring:
   </tr>
   <tr>
     <td>Price</td>
-    <td>$[[${#numbers.formatDecimal(price, 0, 'INDIAN', 2)}]]</td>
+    <td>$[[${#numbers.formatDecimal(price, 0, 'US', 2)}]]</td>
   </tr>
 </table>
 ```
@@ -374,21 +374,21 @@ spring:
 /actuator/metrics
 
 Counter Metrics:
-  - mtbs.payments.captured
-  - mtbs.payments.failed
-  - mtbs.subscriptions.created
-  - mtbs.subscriptions.upgraded
-  - mtbs.notifications.sent
-  - mtbs.notifications.failed
+  - billforge.payments.captured
+  - billforge.payments.failed
+  - billforge.subscriptions.created
+  - billforge.subscriptions.upgraded
+  - billforge.notifications.sent
+  - billforge.notifications.failed
 
 Timer Metrics:
-  - mtbs.payment.verification.duration
-  - mtbs.invoice.generation.duration
-  - mtbs.notification.delivery.duration
+  - billforge.payment.verification.duration
+  - billforge.invoice.generation.duration
+  - billforge.notification.delivery.duration
 
 Gauge Metrics:
-  - mtbs.active.subscriptions
-  - mtbs.cache.hit.ratio
+  - billforge.active.subscriptions
+  - billforge.cache.hit.ratio
   - jvm.memory.used
 ```
 
@@ -411,7 +411,7 @@ Gauge Metrics:
 **Log Pattern:**
 ```
 [appname,traceId,spanId,exportable]
-[mtbs-app,80f198ee56343ba8,e210712f4271d5c9,true]
+[billforge-app,80f198ee56343ba8,e210712f4271d5c9,true]
 ```
 
 ### Structured Logging (Logback + SLF4J)
@@ -432,9 +432,9 @@ Gauge Metrics:
 **Log Format (JSON):**
 ```json
 {
-  "timestamp": "2026-05-22T10:30:45.123Z",
+  "timestamp": "2024-05-22T10:30:45.123Z",
   "level": "INFO",
-  "logger": "com.mtbs.billing.service.PaymentService",
+  "logger": "com.billforge.billing.service.PaymentService",
   "message": "Payment captured successfully",
   "correlationId": "80f198ee56343ba8",
   "tenantId": "t1",
@@ -639,7 +639,7 @@ services:
     build: .
     ports: ["8080:8080"]
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mtbs
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/billforge
       SPRING_REDIS_HOST: redis
       STRIPE_PUBLISHABLE_KEY: ${STRIPE_PUBLISHABLE_KEY}
     depends_on:
@@ -649,7 +649,7 @@ services:
   postgres:
     image: postgres:14
     environment:
-      POSTGRES_DB: mtbs
+      POSTGRES_DB: billforge
       POSTGRES_PASSWORD: password
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -667,14 +667,14 @@ services:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mtbs-app
+  name: billforge-app
 spec:
   replicas: 3
   template:
     spec:
       containers:
-      - name: mtbs
-        image: mtbs:latest
+      - name: billforge
+        image: billforge:latest
         resources:
           requests:
             cpu: 1000m
@@ -700,14 +700,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mtbs-service
+  name: billforge-service
 spec:
   type: LoadBalancer
   ports:
   - port: 80
     targetPort: 8080
   selector:
-    app: mtbs-app
+    app: billforge-app
 ```
 
 ---
@@ -804,7 +804,7 @@ spec:
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | May 2026 | Initial release |
+| 1.0 | September 2024 | Initial release |
 
 **Last Updated:** May 22, 2026  
 **Maintained By:** Engineering Team

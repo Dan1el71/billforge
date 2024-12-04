@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-14
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -125,8 +125,8 @@ spring:
       "tenantName": "Acme Inc"
     },
     "session": {
-      "issuedAt": "2026-05-14T10:30:00Z",
-      "expiresAt": "2026-05-14T10:45:00Z",
+      "issuedAt": "2024-05-14T10:30:00Z",
+      "expiresAt": "2024-05-14T10:45:00Z",
       "isFirstLogin": true
     },
     "flags": {
@@ -235,8 +235,8 @@ spring:
       "tenantName": "Acme Inc"
     },
     "session": {
-      "issuedAt": "2026-05-14T10:35:00Z",
-      "expiresAt": "2026-05-14T10:50:00Z",
+      "issuedAt": "2024-05-14T10:35:00Z",
+      "expiresAt": "2024-05-14T10:50:00Z",
       "isFirstLogin": false
     },
     "flags": {
@@ -317,8 +317,8 @@ VALUES (456, 42, LOGIN, USER, '42', '203.0.113.45', 'Login from Chrome on macOS'
       "tenantName": "Acme Inc"
     },
     "session": {
-      "issuedAt": "2026-05-14T10:45:00Z",
-      "expiresAt": "2026-05-14T11:00:00Z",
+      "issuedAt": "2024-05-14T10:45:00Z",
+      "expiresAt": "2024-05-14T11:00:00Z",
       "isFirstLogin": false
     },
     "flags": {...}
@@ -437,7 +437,7 @@ Cookie: accessToken=...
     "tenantName": "Acme Inc",
     "schemaName": "s_456",
     "permissions": ["USER_VIEW", "USER_MANAGE", "BILLING_MANAGE"],
-    "createdAt": "2026-04-01T08:00:00Z"
+    "createdAt": "2024-04-01T08:00:00Z"
   },
   "message": "Profile fetched successfully"
 }
@@ -780,7 +780,7 @@ See [error-handling.md](./error-handling.md#auth-error-codes) for complete list.
     "message": "Invalid credentials",
     "detail": "Email or password is incorrect"
   },
-  "timestamp": "2026-05-14T10:35:00Z"
+  "timestamp": "2024-05-14T10:35:00Z"
 }
 ```
 

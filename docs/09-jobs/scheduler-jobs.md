@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-16
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -180,19 +180,19 @@ Iteration 2: TenantContext.setTenantId(789)  ← NEW request, same worker #1
 **Example Scenario:**
 ```
 Tenant A subscription:
-  currentPeriodStart: 2026-05-01
-  currentPeriodEnd: 2026-06-01  ← NOW = 2026-06-01
+  currentPeriodStart: 2024-05-01
+  currentPeriodEnd: 2024-06-01  ← NOW = 2024-06-01
   billingCycle: MONTHLY
   
-Job runs 2026-06-01 midnight:
-  Generate invoice for May 1 - June 1 → INV-2026-00100
-  Finalize INV-2026-00100 (DRAFT → OPEN)
+Job runs 2024-06-01 midnight:
+  Generate invoice for May 1 - June 1 → INV-2024-00100
+  Finalize INV-2024-00100 (DRAFT → OPEN)
   Process payment (Stripe PaymentIntent)
   Update subscription:
-    currentPeriodStart: 2026-06-01
-    currentPeriodEnd: 2026-07-01 (30 days later)
+    currentPeriodStart: 2024-06-01
+    currentPeriodEnd: 2024-07-01 (30 days later)
     
-NEXT CYCLE: 2026-07-01 midnight → Generate June 1 - July 1 invoice
+NEXT CYCLE: 2024-07-01 midnight → Generate June 1 - July 1 invoice
 ```
 
 ---
@@ -228,20 +228,20 @@ NEXT CYCLE: 2026-07-01 midnight → Generate June 1 - July 1 invoice
 ```
 Tenant B subscription:
   Status: ACTIVE
-  currentPeriodEnd: 2026-05-20
+  currentPeriodEnd: 2024-05-20
   
-2026-05-20 midnight (BillingCycleJob):
-  Invoice generated → INV-2026-00200
+2024-05-20 midnight (BillingCycleJob):
+  Invoice generated → INV-2024-00200
   Stripe PaymentIntent created
   Status: ACTIVE (payment pending)
   
-2026-05-21 (no payment received):
+2024-05-21 (no payment received):
   Manual check: subscription status → PAST_DUE
   (triggered by PaymentService on failed charge)
   
-2026-05-28 (7 days later):
+2024-05-28 (7 days later):
   SubscriptionExpiryJob hourly run:
-  periodEnd (2026-05-20) < now-7days (2026-05-21)? YES
+  periodEnd (2024-05-20) < now-7days (2024-05-21)? YES
   expireSubscription()
   updateTenantStatus(SUSPENDED)
   Tenant B account locked, users cannot login
@@ -278,21 +278,21 @@ Tenant B subscription:
 ```
 Tenant C subscription:
   Status: TRIALING
-  trialStart: 2026-05-01
-  trialEnd: 2026-05-16 (15-day trial)
+  trialStart: 2024-05-01
+  trialEnd: 2024-05-16 (15-day trial)
   planId: PRO
   
-2026-05-16 midnight (TrialExpiryJob):
-  trialEnd (2026-05-16) < now (2026-05-16)? YES
-  Generate invoice for PRO plan → INV-2026-00300 ($500)
+2024-05-16 midnight (TrialExpiryJob):
+  trialEnd (2024-05-16) < now (2024-05-16)? YES
+  Generate invoice for PRO plan → INV-2024-00300 ($500)
   Set status: PAST_DUE
   Create Stripe payment link
   Publish TRIAL_EXPIRED event → sends email with link
   
-2026-05-17:
+2024-05-17:
   Tenant C user logs in, sees "Trial expired. Please pay $500."
   
-2026-05-23 (7 days later, no payment):
+2024-05-23 (7 days later, no payment):
   SubscriptionExpiryJob marks EXPIRED, suspends tenant
 ```
 
@@ -327,20 +327,20 @@ Tenant C subscription:
 ```
 Tenant D subscription:
   Status: TRIALING
-  trialEnd: 2026-05-20 (3 days from now on 2026-05-17)
+  trialEnd: 2024-05-20 (3 days from now on 2024-05-17)
   planId: ENTERPRISE
   
-2026-05-17 08:00 UTC (TrialEndingSoonJob):
-  now + 3 days window includes 2026-05-20? YES
+2024-05-17 08:00 UTC (TrialEndingSoonJob):
+  now + 3 days window includes 2024-05-20? YES
   Publish TRIAL_ENDING_SOON event
-  Generate invoice → INV-2026-00400 ($2000)
+  Generate invoice → INV-2024-00400 ($2000)
   Create payment link: https://stripe.com/i/...
   
 Email sent to tenant:
   Subject: "Your trial ends in 3 days!"
   Body: "Upgrade now: [PAY $2000]"
   
-2026-05-20:
+2024-05-20:
   User clicks "PAY $2000", completes payment
   TrialExpiryJob skips this subscription (already paid)
   Status: ACTIVE (billing cycle continues)
@@ -379,13 +379,13 @@ Email sent to tenant:
 
 **Example Scenario:**
 ```
-2026-05-15 15:00:
+2024-05-15 15:00:
   PaymentService charges Stripe
   Stripe returns: 504 Gateway Timeout (transient)
   Mark payment FAILED
   Schedule nextRetryAt = 15:00 + 1min
 
-2026-05-15 15:01:
+2024-05-15 15:01:
   PaymentRetryJob (every 6h, but triggered at 15:01 for demo):
   nextRetryAt (15:01) < now (15:01)? YES
   retryCount (0) < 3? YES
@@ -425,10 +425,10 @@ Tenant E user: "Cancel my subscription at end of month"
   Status remains ACTIVE until period end
   User can still use platform
   
-2026-06-01 midnight:
+2024-06-01 midnight:
   BillingCycleJob generates June invoice
   
-2026-06-01 01:00:
+2024-06-01 01:00:
   SubscriptionCancelJob:
   cancelAtPeriodEnd = true AND periodEnd < now? YES
   executeScheduledCancellation()

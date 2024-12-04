@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -255,7 +255,7 @@ public interface SubscriptionDTO {
 
 @Repository
 public interface SubscriptionRepository {
-    @Query("SELECT new com.mtbs.dto.SubscriptionDTO(" +
+    @Query("SELECT new com.billforge.dto.SubscriptionDTO(" +
            "s.id, p.name, s.status) " +
            "FROM Subscription s " +
            "LEFT JOIN s.plan p " +
@@ -739,7 +739,7 @@ public List<Plan> resolvePrices() {
 
 3. **Query Result Caching** - Cache entire query results (not just entities). TTL-based invalidation.
 
-4. **Database Partitioning** - Partition invoices by date (2026-01, 2026-02, ...). Faster range queries (only scan relevant partitions).
+4. **Database Partitioning** - Partition invoices by date (2024-01, 2024-02, ...). Faster range queries (only scan relevant partitions).
 
 5. **Connection Pool Tuning** - Dynamic pool size based on load. Reduce when quiet, increase for spikes.
 
@@ -750,5 +750,5 @@ public List<Plan> resolvePrices() {
 ## Related Documents
 
 - [scalability.md](./scalability.md) - Load distribution and caching strategy
-- [redis-data-model.md](./redis-data-model.md) - Cache structure and data models
+- [redis-data-model.md](../07-data-model/redis-data-model.md) - Cache structure and data models
 - [observability.md](./observability.md) - Metrics and query profiling

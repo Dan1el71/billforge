@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-14
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -123,8 +123,8 @@ business:
     "address": "Calle 100 #15-20, Bogotá, Colombia",
     "taxId": "27AAPCS1234H1Z0",
     "stripeCustomerId": "cust_2c7P8k4x9M3z5q",
-    "createdAt": "2026-05-14T14:30:00Z",
-    "updatedAt": "2026-05-14T14:30:00Z"
+    "createdAt": "2024-05-14T14:30:00Z",
+    "updatedAt": "2024-05-14T14:30:00Z"
   },
   "message": "Customer created successfully"
 }
@@ -172,7 +172,7 @@ GET /api/v1/customers?search=Acme&page=0&size=20&sort=createdAt,desc
         "address": "Calle 100 #15-20, Bogotá, Colombia",
         "taxId": "27AAPCS1234H1Z0",
         "stripeCustomerId": "cust_2c7P8k4x9M3z5q",
-        "createdAt": "2026-05-14T14:30:00Z"
+        "createdAt": "2024-05-14T14:30:00Z"
       }
     ],
     "totalElements": 1,
@@ -211,8 +211,8 @@ GET /api/v1/customers?search=Acme&page=0&size=20&sort=createdAt,desc
     "address": "Calle 100 #15-20, Bogotá, Colombia",
     "taxId": "27AAPCS1234H1Z0",
     "stripeCustomerId": "cust_2c7P8k4x9M3z5q",
-    "createdAt": "2026-05-14T14:30:00Z",
-    "updatedAt": "2026-05-14T14:30:00Z"
+    "createdAt": "2024-05-14T14:30:00Z",
+    "updatedAt": "2024-05-14T14:30:00Z"
   },
   "message": "Customer fetched successfully"
 }
@@ -245,7 +245,7 @@ GET /api/v1/customers?search=Acme&page=0&size=20&sort=createdAt,desc
     "address": "Calle 100 #15-20, Bogotá, Colombia",
     "taxId": "27AAPCS1234H1Z1",
     "stripeCustomerId": "cust_2c7P8k4x9M3z5q",
-    "updatedAt": "2026-05-14T15:45:00Z"
+    "updatedAt": "2024-05-14T15:45:00Z"
   },
   "message": "Customer updated successfully"
 }
@@ -316,8 +316,8 @@ GET /api/v1/customers?search=Acme&page=0&size=20&sort=createdAt,desc
     "hsnSacCode": "998361",
     "unit": "subscription",
     "isActive": true,
-    "createdAt": "2026-05-14T14:30:00Z",
-    "updatedAt": "2026-05-14T14:30:00Z"
+    "createdAt": "2024-05-14T14:30:00Z",
+    "updatedAt": "2024-05-14T14:30:00Z"
   },
   "message": "Product created successfully"
 }
@@ -368,14 +368,14 @@ GET /api/v1/products?search=Professional&page=0&size=20
         "hsnSacCode": "998361",
         "unit": "subscription",
         "isActive": true,
-        "createdAt": "2026-05-14T14:30:00Z"
+        "createdAt": "2024-05-14T14:30:00Z"
       },
       {
         "id": 2,
         "name": "Professional Plan (Legacy)",
         "price": 4000.00,
         "isActive": false,
-        "createdAt": "2026-04-01T00:00:00Z"
+        "createdAt": "2024-04-01T00:00:00Z"
       }
     ],
     "totalElements": 2,
@@ -453,8 +453,8 @@ GET /api/v1/products/active
     "hsnSacCode": "998361",
     "unit": "subscription",
     "isActive": true,
-    "createdAt": "2026-05-14T14:30:00Z",
-    "updatedAt": "2026-05-14T14:30:00Z"
+    "createdAt": "2024-05-14T14:30:00Z",
+    "updatedAt": "2024-05-14T14:30:00Z"
   },
   "message": "Product fetched successfully"
 }
@@ -485,7 +485,7 @@ GET /api/v1/products/active
     "price": 6000.00,
     "taxPercentage": 18.00,
     "isActive": true,
-    "updatedAt": "2026-05-14T15:45:00Z"
+    "updatedAt": "2024-05-14T15:45:00Z"
   },
   "message": "Product updated successfully"
 }

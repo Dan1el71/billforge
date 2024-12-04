@@ -4,7 +4,7 @@
 
 The **Customer Management** module handles the lifecycle of B2B customers within a tenant's ecosystem. It enables businesses to create, manage, and track customer information with tax compliance features (tax ).
 
-**Module Location:** `src/main/java/com/mtbs/business/customer/`
+**Module Location:** `src/main/java/com/billforge/business/customer/`
 
 ---
 
@@ -121,8 +121,8 @@ Content-Type: application/json
   "address": "Calle 100 #15-20, Bogotá, Colombia",
   "taxId": "27AABCT1234H1Z0",
   "stripeCustomerId": "cust_A1b2C3d4E5f6G7h8i",
-  "createdAt": "2026-05-15T10:30:00Z",
-  "updatedAt": "2026-05-15T10:30:00Z"
+  "createdAt": "2024-05-15T10:30:00Z",
+  "updatedAt": "2024-05-15T10:30:00Z"
 }
 ```
 
@@ -150,7 +150,7 @@ Authorization: Bearer <token>
       "email": "billing@acme.com",
       "phone": "+57-3001234567",
       "taxId": "27AABCT1234H1Z0",
-      "createdAt": "2026-05-15T10:30:00Z"
+      "createdAt": "2024-05-15T10:30:00Z"
     },
     {
       "id": 2,
@@ -158,7 +158,7 @@ Authorization: Bearer <token>
       "email": "accounts@acme-north.com",
       "phone": "+57-3001234568",
       "taxId": "27AABCU5678H2Z1",
-      "createdAt": "2026-05-16T14:15:00Z"
+      "createdAt": "2024-05-16T14:15:00Z"
     }
   ],
   "page": 0,
@@ -194,8 +194,8 @@ Authorization: Bearer <token>
   "address": "Calle 100 #15-20, Bogotá, Colombia",
   "taxId": "27AABCT1234H1Z0",
   "stripeCustomerId": "cust_A1b2C3d4E5f6G7h8i",
-  "createdAt": "2026-05-15T10:30:00Z",
-  "updatedAt": "2026-05-15T10:30:00Z"
+  "createdAt": "2024-05-15T10:30:00Z",
+  "updatedAt": "2024-05-15T10:30:00Z"
 }
 ```
 
@@ -230,8 +230,8 @@ Content-Type: application/json
   "address": "Calle 100 #15-20, Bogotá, Colombia",
   "taxId": "27AABCT1234H1Z0",
   "stripeCustomerId": "cust_A1b2C3d4E5f6G7h8i",
-  "createdAt": "2026-05-15T10:30:00Z",
-  "updatedAt": "2026-05-26T15:45:00Z"
+  "createdAt": "2024-05-15T10:30:00Z",
+  "updatedAt": "2024-05-26T15:45:00Z"
 }
 ```
 
@@ -557,7 +557,7 @@ If customer is permanently inactive, create a "Deactivated" status (future enhan
 
 ## Related Documentation
 
-- [Invoicing Module - Business Invoices](./invoicing.md)
-- [Payment Recording](./payments.md)
+- [Invoicing Module - Business Invoices](../05-platform-billing/invoice.md)
+- [Payment Recording](../05-platform-billing/payment-processing.md)
 - [Reporting & Analytics](./reporting.md)
-- [Multi-Tenancy Isolation](../backend/02-multi-tenancy/isolation.md)
+- [Multi-Tenancy Isolation](../02-multi-tenancy/multi-tenancy-strategy.md)

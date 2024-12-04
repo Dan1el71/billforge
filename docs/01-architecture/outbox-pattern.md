@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -72,7 +72,7 @@ The scheduler might process the same event twice:
 3. Scheduler restarts, finds event 1 still PENDING
 4. Event 1 published again → **duplicate**
 
-Idempotency keys prevent duplicates: `aggregateType:aggregateId:eventType:date` ensures the same business event (e.g., invoice 456 created on 2026-04-24) is only processed once, even if published multiple times.
+Idempotency keys prevent duplicates: `aggregateType:aggregateId:eventType:date` ensures the same business event (e.g., invoice 456 created on 2024-04-24) is only processed once, even if published multiple times.
 
 ### Why Distributed Locks?
 
@@ -120,7 +120,7 @@ CREATE TABLE outbox_events (
     aggregate_id        VARCHAR(100)  -- "456" (entity ID)
     payload             TEXT          -- JSON: full event data serialized
     event_class         VARCHAR(255)  -- Java class name for deserialization
-    idempotency_key     VARCHAR(255)  -- "Invoice:456:Created:2026-04-24"
+    idempotency_key     VARCHAR(255)  -- "Invoice:456:Created:2024-04-24"
     retry_count         INTEGER       -- Current retry attempt (0-5)
     max_retries         INTEGER       -- Maximum retries allowed
     last_error          TEXT          -- Error message from failed attempt
@@ -193,29 +193,29 @@ CREATE INDEX idx_outbox_status_locked
 "{aggregateType}:{aggregateId}:{eventType}:{date}"
 
 Examples:
-- "Invoice:456:Created:2026-04-24"
-- "Subscription:789:Upgraded:2026-04-24"
-- "Payment:321:Captured:2026-04-24"
+- "Invoice:456:Created:2024-04-24"
+- "Subscription:789:Upgraded:2024-04-24"
+- "Payment:321:Captured:2024-04-24"
 ```
 
 **Duplicate Detection:**
 ```
-1. Event 1 arrives (Invoice 456 created on 2026-04-24)
-   └─ idempotencyKey = "Invoice:456:Created:2026-04-24"
+1. Event 1 arrives (Invoice 456 created on 2024-04-24)
+   └─ idempotencyKey = "Invoice:456:Created:2024-04-24"
    └─ Check: SELECT COUNT(*) FROM outbox WHERE idempotency_key = ?
    └─ Result: 0 (not found)
    └─ INSERT into outbox_events
    └─ published = true
 
 2. Event 1 arrives AGAIN (duplicate from retry mechanism)
-   └─ idempotencyKey = "Invoice:456:Created:2026-04-24" (same!)
+   └─ idempotencyKey = "Invoice:456:Created:2024-04-24" (same!)
    └─ Check: SELECT COUNT(*) FROM outbox WHERE idempotency_key = ?
    └─ Result: 1 (found!)
    └─ SKIP INSERT (idempotency prevents duplicate)
    └─ Log: "Duplicate event skipped"
 
-3. Different event on same invoice (Invoice 456 updated on 2026-04-24)
-   └─ idempotencyKey = "Invoice:456:Updated:2026-04-24" (different!)
+3. Different event on same invoice (Invoice 456 updated on 2024-04-24)
+   └─ idempotencyKey = "Invoice:456:Updated:2024-04-24" (different!)
    └─ Check: SELECT COUNT(*) FROM outbox WHERE idempotency_key = ?
    └─ Result: 0 (not found)
    └─ INSERT into outbox_events (both created + updated events now exist)

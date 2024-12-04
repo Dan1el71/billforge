@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -312,14 +312,14 @@ Events are serialized to JSON (for outbox storage):
 {
   "eventType": "INVOICE_GENERATED",
   "eventId": "550e8400-e29b-41d4-a716-446655440000",
-  "occurredAt": "2026-04-24T10:15:30.123Z",
+  "occurredAt": "2024-04-24T10:15:30.123Z",
   "tenantId": 456,
   "invoiceId": 100,
-  "invoiceNumber": "INV-2026-00100",
+  "invoiceNumber": "INV-2024-00100",
   "amount": 999.00,
   "currency": "USD",
   "status": "DRAFT",
-  "dueDate": "2026-05-24",
+  "dueDate": "2024-05-24",
   "recipientEmail": "owner@acme.com",
   "recipientName": "John Doe"
 }
@@ -486,5 +486,5 @@ See Event Publishing Points ASCII art above.
 - [request-flow.md](./request-flow.md) - HTTP request flow; where events are published
 - [notification-events.md](../08-events/notification-events.md) - Notification-specific events + listeners
 - [domain-events.md](../08-events/domain-events.md) - Catalog of all business domain events
-- [audit-events.md](../08-events/audit-events.md) - Audit log events + compliance
+- [audit-events.md](../08-events/domain-events.md) - Audit log events + compliance
 - [system-design.md](./system-design.md) - Architecture overview

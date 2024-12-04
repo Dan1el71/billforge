@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -584,9 +584,9 @@ SELECT * FROM flyway_schema_history;
 
 version | description                                  | type | script | installed_by | installed_on | execution_time | success
 --------|----------------------------------------------|------|--------|--------------|--------------|----------------|--------
-1       | Initial schema                               | SQL  | V1.0   | admin        | 2026-05-17   | 145            | true
-2       | Add plans                                    | SQL  | V1.1   | admin        | 2026-05-17   | 89             | true
-3       | Add subscriptions                            | SQL  | V1.2   | admin        | 2026-05-17   | 234            | true
+1       | Initial schema                               | SQL  | V1.0   | admin        | 2024-05-17   | 145            | true
+2       | Add plans                                    | SQL  | V1.1   | admin        | 2024-05-17   | 89             | true
+3       | Add subscriptions                            | SQL  | V1.2   | admin        | 2024-05-17   | 234            | true
 ...
 
 -- Metrics to track:
@@ -709,5 +709,5 @@ CREATE TABLE subscriptions (
 
 ## Related Documents
 
-- [configuration-reference.md](./configuration-reference.md) - Flyway configuration
-- [observability.md](./observability.md) - Monitoring migration execution time
+- [configuration-reference.md](../10-non-functional/configuration-reference.md) - Flyway configuration
+- [observability.md](../10-non-functional/observability.md) - Monitoring migration execution time

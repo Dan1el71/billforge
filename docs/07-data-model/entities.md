@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-24
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -565,7 +565,7 @@ public class Invoice extends AuditableEntity {
     private Long subscriptionId;            // FK to Subscription
     
     @Column(name = "invoice_number", nullable = false, unique = true, length = 50)
-    private String invoiceNumber;           // e.g., "INV-2026-0001" (auto-generated)
+    private String invoiceNumber;           // e.g., "INV-2024-0001" (auto-generated)
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 50)
@@ -766,10 +766,10 @@ public class UsageRecord extends AuditableEntity {
     private Long quantity;
     
     @Column(name = "metric_period_start")
-    private Instant metricPeriodStart;      // e.g., 2026-04-01 (month start)
+    private Instant metricPeriodStart;      // e.g., 2024-04-01 (month start)
     
     @Column(name = "metric_period_end")
-    private Instant metricPeriodEnd;        // e.g., 2026-04-30 (month end)
+    private Instant metricPeriodEnd;        // e.g., 2024-04-30 (month end)
     
     @Column(columnDefinition = "JSONB")
     private String metadata;                // Custom attributes (e.g., customer_id, product_id)
@@ -1065,24 +1065,24 @@ PaymentService.verifyAndCapturePayment()
 
 | Component | Tag | Location | Purpose |
 |-----------|-----|----------|---------|
-| AuditableEntity | [SHD-2] | [src/main/java/com/mtbs/shared/entity/AuditableEntity.java](../../src/main/java/com/mtbs/shared/entity/AuditableEntity.java) | Base class with audit fields |
-| Tenant | [TEN-1] | [src/main/java/com/mtbs/tenant/entity/Tenant.java](../../src/main/java/com/mtbs/tenant/entity/Tenant.java) | Platform tenant record |
-| Plan | [TEN-2] | [src/main/java/com/mtbs/tenant/entity/Plan.java](../../src/main/java/com/mtbs/tenant/entity/Plan.java) | Subscription plan template |
-| User | [AUTH-1] | [src/main/java/com/mtbs/auth/entity/User.java](../../src/main/java/com/mtbs/auth/entity/User.java) | Tenant user (in tenant schema) |
-| Role | [AUTH-2] | [src/main/java/com/mtbs/auth/entity/Role.java](../../src/main/java/com/mtbs/auth/entity/Role.java) | User role for RBAC |
-| Permission | [AUTH-3] | [src/main/java/com/mtbs/auth/entity/Permission.java](../../src/main/java/com/mtbs/auth/entity/Permission.java) | Platform-level permission |
-| RolePermission | [AUTH-4] | [src/main/java/com/mtbs/auth/entity/RolePermission.java](../../src/main/java/com/mtbs/auth/entity/RolePermission.java) | Role-Permission join |
-| RefreshToken | [AUTH-5] | [src/main/java/com/mtbs/auth/entity/RefreshToken.java](../../src/main/java/com/mtbs/auth/entity/RefreshToken.java) | JWT refresh token |
-| Subscription | [BIL-1] | [src/main/java/com/mtbs/billing/entity/Subscription.java](../../src/main/java/com/mtbs/billing/entity/Subscription.java) | Plan subscription record |
-| Invoice | [BIL-2] | [src/main/java/com/mtbs/billing/entity/Invoice.java](../../src/main/java/com/mtbs/billing/entity/Invoice.java) | Billing invoice |
-| InvoiceLineItem | [BIL-3] | [src/main/java/com/mtbs/billing/entity/InvoiceLineItem.java](../../src/main/java/com/mtbs/billing/entity/InvoiceLineItem.java) | Invoice line item |
-| Payment | [BIL-4] | [src/main/java/com/mtbs/billing/entity/Payment.java](../../src/main/java/com/mtbs/billing/entity/Payment.java) | Payment record (Stripe) |
-| UsageRecord | [BIL-5] | [src/main/java/com/mtbs/billing/entity/UsageRecord.java](../../src/main/java/com/mtbs/billing/entity/UsageRecord.java) | Raw usage event |
-| UsageSummary | [BIL-6] | [src/main/java/com/mtbs/billing/entity/UsageSummary.java](../../src/main/java/com/mtbs/billing/entity/UsageSummary.java) | Monthly usage aggregation |
-| Customer | [BUS-1] | [src/main/java/com/mtbs/business/customer/entity/Customer.java](../../src/main/java/com/mtbs/business/customer/entity/Customer.java) | Business customer record |
-| Product | [BUS-8] | [src/main/java/com/mtbs/business/product/entity/Product.java](../../src/main/java/com/mtbs/business/product/entity/Product.java) | Product offered by tenant |
-| BusinessInvoice | [BUS-15] | [src/main/java/com/mtbs/business/invoice/entity/BusinessInvoice.java](../../src/main/java/com/mtbs/business/invoice/entity/BusinessInvoice.java) | Tenant's invoice to customer |
-| AuditLog | [ADM-5] | [src/main/java/com/mtbs/admin/service/AuditLogService.java](../../src/main/java/com/mtbs/admin/service/AuditLogService.java) | Audit trail (immutable) |
+| AuditableEntity | [SHD-2] | [src/main/java/com/billforge/shared/entity/AuditableEntity.java](../../src/main/java/com/billforge/shared/entity/AuditableEntity.java) | Base class with audit fields |
+| Tenant | [TEN-1] | [src/main/java/com/billforge/tenant/entity/Tenant.java](../../src/main/java/com/billforge/tenant/entity/Tenant.java) | Platform tenant record |
+| Plan | [TEN-2] | [src/main/java/com/billforge/tenant/entity/Plan.java](../../src/main/java/com/billforge/tenant/entity/Plan.java) | Subscription plan template |
+| User | [AUTH-1] | [src/main/java/com/billforge/auth/entity/User.java](../../src/main/java/com/billforge/auth/entity/User.java) | Tenant user (in tenant schema) |
+| Role | [AUTH-2] | [src/main/java/com/billforge/auth/entity/Role.java](../../src/main/java/com/billforge/auth/entity/Role.java) | User role for RBAC |
+| Permission | [AUTH-3] | [src/main/java/com/billforge/auth/entity/Permission.java](../../src/main/java/com/billforge/auth/entity/Permission.java) | Platform-level permission |
+| RolePermission | [AUTH-4] | [src/main/java/com/billforge/auth/entity/RolePermission.java](../../src/main/java/com/billforge/auth/entity/RolePermission.java) | Role-Permission join |
+| RefreshToken | [AUTH-5] | [src/main/java/com/billforge/auth/entity/RefreshToken.java](../../src/main/java/com/billforge/auth/entity/RefreshToken.java) | JWT refresh token |
+| Subscription | [BIL-1] | [src/main/java/com/billforge/billing/entity/Subscription.java](../../src/main/java/com/billforge/billing/entity/Subscription.java) | Plan subscription record |
+| Invoice | [BIL-2] | [src/main/java/com/billforge/billing/entity/Invoice.java](../../src/main/java/com/billforge/billing/entity/Invoice.java) | Billing invoice |
+| InvoiceLineItem | [BIL-3] | [src/main/java/com/billforge/billing/entity/InvoiceLineItem.java](../../src/main/java/com/billforge/billing/entity/InvoiceLineItem.java) | Invoice line item |
+| Payment | [BIL-4] | [src/main/java/com/billforge/billing/entity/Payment.java](../../src/main/java/com/billforge/billing/entity/Payment.java) | Payment record (Stripe) |
+| UsageRecord | [BIL-5] | [src/main/java/com/billforge/billing/entity/UsageRecord.java](../../src/main/java/com/billforge/billing/entity/UsageRecord.java) | Raw usage event |
+| UsageSummary | [BIL-6] | [src/main/java/com/billforge/billing/entity/UsageSummary.java](../../src/main/java/com/billforge/billing/entity/UsageSummary.java) | Monthly usage aggregation |
+| Customer | [BUS-1] | [src/main/java/com/billforge/business/customer/entity/Customer.java](../../src/main/java/com/billforge/business/customer/entity/Customer.java) | Business customer record |
+| Product | [BUS-8] | [src/main/java/com/billforge/business/product/entity/Product.java](../../src/main/java/com/billforge/business/product/entity/Product.java) | Product offered by tenant |
+| BusinessInvoice | [BUS-15] | [src/main/java/com/billforge/business/invoice/entity/BusinessInvoice.java](../../src/main/java/com/billforge/business/invoice/entity/BusinessInvoice.java) | Tenant's invoice to customer |
+| AuditLog | [ADM-5] | [src/main/java/com/billforge/admin/service/AuditLogService.java](../../src/main/java/com/billforge/admin/service/AuditLogService.java) | Audit trail (immutable) |
 
 
 ## Rules & Constraints
@@ -1141,7 +1141,7 @@ User A: Next API request → permission cache MISS → re-fetches from DB
 
 ```java
 @Column(name = "billing_period_start")
-private Instant billingPeriodStart;   // Always UTC, e.g., 2026-04-01T00:00:00Z
+private Instant billingPeriodStart;   // Always UTC, e.g., 2024-04-01T00:00:00Z
 ```
 
 **Calculation error:** DO NOT use `LocalDate.now()` + convert to Instant. Use `Instant.now()` directly.

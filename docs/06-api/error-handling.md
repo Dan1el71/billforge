@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-25
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -81,7 +81,7 @@ spring:
 
 logging:
   level:
-    com.mtbs.app.exception: DEBUG  # Log exception handler decisions
+    com.billforge.app.exception: DEBUG  # Log exception handler decisions
 ```
 
 ---
@@ -480,7 +480,7 @@ Success response:
 {
   "success": true,
   "data": {"id": 123, "name": "Acme Inc"},
-  "timestamp": "2026-04-25T10:30:00Z"
+  "timestamp": "2024-04-25T10:30:00Z"
 }
 ```
 
@@ -490,7 +490,7 @@ Error response:
   "success": false,
   "message": "Payment verification failed",
   "errorCode": "PAY_5005",
-  "timestamp": "2026-04-25T10:30:00Z"
+  "timestamp": "2024-04-25T10:30:00Z"
 }
 ```
 
@@ -504,7 +504,7 @@ Validation error response:
     "email": "must be a valid email address",
     "password": "must be at least 8 characters"
   },
-  "timestamp": "2026-04-25T10:30:00Z"
+  "timestamp": "2024-04-25T10:30:00Z"
 }
 ```
 
@@ -680,15 +680,15 @@ MdcLoggingFilter (finally block)
 
 | Component | Tag | Location | Purpose |
 |-----------|-----|----------|---------|
-| BaseException | [SHD-18] | [src/main/java/com/mtbs/shared/exception/BaseException.java](../../src/main/java/com/mtbs/shared/exception/BaseException.java) | Exception base class |
-| ErrorCode | [SHD-19] | [src/main/java/com/mtbs/shared/exception/ErrorCode.java](../../src/main/java/com/mtbs/shared/exception/ErrorCode.java) | Error code enum |
-| AuthException | [SHD-21] | [src/main/java/com/mtbs/shared/exception/AuthException.java](../../src/main/java/com/mtbs/shared/exception/AuthException.java) | Auth-specific exceptions |
-| ResourceException | [SHD-20] | [src/main/java/com/mtbs/shared/exception/ResourceException.java](../../src/main/java/com/mtbs/shared/exception/ResourceException.java) | Resource access exceptions |
-| PaymentException | [SHD-23] | [src/main/java/com/mtbs/shared/exception/PaymentException.java](../../src/main/java/com/mtbs/shared/exception/PaymentException.java) | Payment exceptions |
-| SubscriptionException | [SHD-25] | [src/main/java/com/mtbs/shared/exception/SubscriptionException.java](../../src/main/java/com/mtbs/shared/exception/SubscriptionException.java) | Subscription exceptions |
-| TenantException | [SHD-22] | [src/main/java/com/mtbs/shared/exception/TenantException.java](../../src/main/java/com/mtbs/shared/exception/TenantException.java) | Tenant/onboarding exceptions |
-| GlobalExceptionHandler | [APP-10] | [src/main/java/com/mtbs/app/exception/GlobalExceptionHandler.java](../../src/main/java/com/mtbs/app/exception/GlobalExceptionHandler.java) | Centralized exception handling |
-| ApiResponse | [SHD-50] | [src/main/java/com/mtbs/shared/dto/common/ApiResponse.java](../../src/main/java/com/mtbs/shared/dto/common/ApiResponse.java) | Standard response format |
+| BaseException | [SHD-18] | [src/main/java/com/billforge/shared/exception/BaseException.java](../../src/main/java/com/billforge/shared/exception/BaseException.java) | Exception base class |
+| ErrorCode | [SHD-19] | [src/main/java/com/billforge/shared/exception/ErrorCode.java](../../src/main/java/com/billforge/shared/exception/ErrorCode.java) | Error code enum |
+| AuthException | [SHD-21] | [src/main/java/com/billforge/shared/exception/AuthException.java](../../src/main/java/com/billforge/shared/exception/AuthException.java) | Auth-specific exceptions |
+| ResourceException | [SHD-20] | [src/main/java/com/billforge/shared/exception/ResourceException.java](../../src/main/java/com/billforge/shared/exception/ResourceException.java) | Resource access exceptions |
+| PaymentException | [SHD-23] | [src/main/java/com/billforge/shared/exception/PaymentException.java](../../src/main/java/com/billforge/shared/exception/PaymentException.java) | Payment exceptions |
+| SubscriptionException | [SHD-25] | [src/main/java/com/billforge/shared/exception/SubscriptionException.java](../../src/main/java/com/billforge/shared/exception/SubscriptionException.java) | Subscription exceptions |
+| TenantException | [SHD-22] | [src/main/java/com/billforge/shared/exception/TenantException.java](../../src/main/java/com/billforge/shared/exception/TenantException.java) | Tenant/onboarding exceptions |
+| GlobalExceptionHandler | [APP-10] | [src/main/java/com/billforge/app/exception/GlobalExceptionHandler.java](../../src/main/java/com/billforge/app/exception/GlobalExceptionHandler.java) | Centralized exception handling |
+| ApiResponse | [SHD-50] | [src/main/java/com/billforge/shared/dto/common/ApiResponse.java](../../src/main/java/com/billforge/shared/dto/common/ApiResponse.java) | Standard response format |
 
 
 ---
@@ -782,7 +782,7 @@ throw ResourceException.accessDenied("Attempting to access different tenant's da
 
 ```java
 // Correct
-private Instant timestamp = Instant.now();  // 2026-04-25T10:30:00Z
+private Instant timestamp = Instant.now();  // 2024-04-25T10:30:00Z
 
 // Wrong
 private LocalDateTime timestamp = LocalDateTime.now();  // No timezone info

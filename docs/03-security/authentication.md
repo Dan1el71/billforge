@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -71,8 +71,8 @@ Platform admins (super admins) operate outside tenant contexts. A separate `supe
 - `jwt.secret` - HMAC secret key (base64-encoded, minimum 32 bytes for HS256)
 - `jwt.expiration` - Access token TTL (ms) - typically 900000 (15 minutes)
 - `jwt.refresh-expiration` - Refresh token TTL (ms) - typically 604800000 (7 days)
-- `jwt.issuer` - JWT issuer claim (e.g., "mtbs.io")
-- `jwt.audience` - JWT audience claim (e.g., "mtbs-web")
+- `jwt.issuer` - JWT issuer claim (e.g., "billforge.io")
+- `jwt.audience` - JWT audience claim (e.g., "billforge-web")
 - `spring.security.cors.allowed-origins` - Allowed CORS origins for browser requests
 
 ---
@@ -89,8 +89,8 @@ Platform admins (super admins) operate outside tenant contexts. A separate `supe
   "roleId": 456,                    // User's role ID in this tenant
   "tokenVersion": 2,                // Invalidation marker (co-located with this user in DB)
   "typ": "ACCESS",                  // Token type
-  "iss": "mtbs.io",                 // Issuer
-  "aud": ["mtbs-web"],              // Audience
+  "iss": "billforge.io",                 // Issuer
+  "aud": ["billforge-web"],              // Audience
   "iat": 1704067200000,             // Issued at (ms)
   "exp": 1704068100000              // Expiration (ms)
 }
@@ -102,11 +102,11 @@ Signed with HMAC-SHA256 using `jwt.secret`.
 ```
 {
   "sub": "adminId",
-  "email": "admin@mtbs.io",
+  "email": "admin@billforge.io",
   "isSuperAdmin": true,             // Flag: this is super admin, NOT tenant user
   "typ": "ACCESS",
-  "iss": "mtbs.io",
-  "aud": ["mtbs-web"],
+  "iss": "billforge.io",
+  "aud": ["billforge-web"],
   "iat": 1704067200000,
   "exp": 1704068100000
 }

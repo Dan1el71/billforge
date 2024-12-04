@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-22
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -93,7 +93,7 @@ This folder contains **3 professional, enterprise-grade public-facing documents*
 
 #### Contents:
 - **Quick Reference** - All technologies at a glance (table)
-- **Core Framework** - Spring Boot 3.4.3, Spring Data, Spring Security
+- **Core Framework** - Spring Boot 3.3.6, Spring Data, Spring Security
 - **Data Layer** - PostgreSQL, Hibernate ORM, HikariCP connection pooling
 - **Cache Layer** - Redis cluster, data model, TTL strategies, eviction policies
 - **Authentication & Security** - JWT specifications, token claims, HttpOnly cookies
@@ -262,8 +262,8 @@ See README.md → Documentation Structure section for complete listing
 ### Quick Links to Key Phase Documents
 
 **Getting Started:**
-- [Phase 1: System Design](../01-foundation/01-system-design.md)
-- [Phase 2: Request Flow](../01-foundation/02-request-flow.md)
+- [Phase 1: System Design](../01-architecture/system-design.md)
+- [Phase 2: Request Flow](../01-architecture/request-flow.md)
 
 **API Development:**
 - [Phase 3: Auth API](../06-api/auth-api.md)
@@ -273,12 +273,12 @@ See README.md → Documentation Structure section for complete listing
 **Production Patterns:**
 - [Phase 4: Observability](../10-non-functional/observability.md)
 - [Phase 4: Scalability](../10-non-functional/scalability.md)
-- [Phase 4: Webhook Security](../05-platform-billing/webhook-security.md)
+- [Phase 4: Webhook Security](../03-security/webhook-security.md)
 
 **Business Logic:**
 - [Phase 4: Plan Change Flow](../05-platform-billing/plan-change-flow.md)
 - [Phase 4: Proration](../05-platform-billing/proration.md)
-- [Phase 4: Domain Events](../05-platform-billing/domain-events.md)
+- [Phase 4: Domain Events](../08-events/domain-events.md)
 
 ---
 

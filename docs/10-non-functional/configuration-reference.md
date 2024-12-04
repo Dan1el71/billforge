@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-17
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -43,13 +43,13 @@ Spring Boot resolves configuration in this order (later overrides earlier):
 
 ```yaml
 # application.yaml
-spring.datasource.url: jdbc:postgresql://localhost:5432/mtbs
+spring.datasource.url: jdbc:postgresql://localhost:5432/billforge
 
 # application-prod.yaml (overrides)
-spring.datasource.url: jdbc:postgresql://prod-db.rds.amazonaws.com:5432/mtbs
+spring.datasource.url: jdbc:postgresql://prod-db.rds.amazonaws.com:5432/billforge
 
 # Environment variable (highest priority)
-export SPRING_DATASOURCE_URL=jdbc:postgresql://prod-db-replica.rds.amazonaws.com/mtbs
+export SPRING_DATASOURCE_URL=jdbc:postgresql://prod-db-replica.rds.amazonaws.com/billforge
 ```
 
 ---
@@ -92,7 +92,7 @@ export SERVER_SERVLET_CONTEXT_PATH=/v1/api
 ```yaml
 spring:
   application:
-    name: mtbs  # Application name for logs
+    name: billforge  # Application name for logs
   
   profiles:
     active: dev  # Active profile (dev/test/prod)
@@ -117,7 +117,7 @@ spring:
 ```yaml
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mtbs
+    url: jdbc:postgresql://localhost:5432/billforge
     username: ${DB_USER}  # From environment
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -155,7 +155,7 @@ spring:
 ```yaml
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mtbs_dev
+    url: jdbc:postgresql://localhost:5432/billforge_dev
     username: postgres
     password: postgres
   
@@ -192,7 +192,7 @@ spring:
 ```bash
 export DB_HOST=prod-db.rds.amazonaws.com
 export DB_PORT=5432
-export DB_NAME=mtbs
+export DB_NAME=billforge
 export DB_USER=${SECRETS_MANAGER_DB_USER}
 export DB_PASSWORD=${SECRETS_MANAGER_DB_PASSWORD}
 ```
@@ -236,7 +236,7 @@ spring:
     store-type: redis
     timeout: 1800s  # 30 min session timeout
     redis:
-      namespace: mtbs:session
+      namespace: billforge:session
       flush-mode: on-save
 ```
 
@@ -291,8 +291,8 @@ app:
     secret: ${JWT_SECRET}  # Min 256 bits for HS256
     access-token-expiry: 15m  # Access token: 15 minutes
     refresh-token-expiry: 7d  # Refresh token: 7 days
-    issuer: https://mtbs.example.com
-    audience: mtbs-app
+    issuer: https://billforge.example.com
+    audience: billforge-app
     
   security:
     cors:
@@ -468,8 +468,8 @@ app:
 logging:
   level:
     root: WARN  # Default level
-    com.mtbs: INFO
-    com.mtbs.billing: DEBUG  # Sensitive module
+    com.billforge: INFO
+    com.billforge.billing: DEBUG  # Sensitive module
     org.springframework.web: WARN
     org.springframework.security: INFO
     org.hibernate: WARN
@@ -479,7 +479,7 @@ logging:
     file: "%d{ISO8601} %-5level [%X{tenantId}] [%X{correlationId}] %logger{36} : %msg%n"
   
   file:
-    name: logs/mtbs.log
+    name: logs/billforge.log
     max-size: 100MB
     max-history: 30  # Keep 30 days of logs
     total-size-cap: 10GB  # Total log size before cleanup
@@ -495,9 +495,9 @@ logging:
 # logback-spring.xml
 <configuration>
   <appender name="json-file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <file>logs/mtbs.json</file>
+    <file>logs/billforge.json</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-      <fileNamePattern>logs/mtbs-%d{yyyy-MM-dd}.%i.json.gz</fileNamePattern>
+      <fileNamePattern>logs/billforge-%d{yyyy-MM-dd}.%i.json.gz</fileNamePattern>
       <maxFileSize>100MB</maxFileSize>
       <maxHistory>30</maxHistory>
     </rollingPolicy>
@@ -551,7 +551,7 @@ management:
       prometheus:
         enabled: true
     tags:
-      application: mtbs
+      application: billforge
       environment: ${ENVIRONMENT:dev}
       version: 1.0.0
 ```
@@ -710,7 +710,7 @@ spring:
 
 logging:
   level:
-    com.mtbs: DEBUG
+    com.billforge: DEBUG
     org.springframework.web: DEBUG
 
 app:
@@ -743,7 +743,7 @@ spring:
 
 logging:
   level:
-    com.mtbs: DEBUG
+    com.billforge: DEBUG
 ```
 
 ### Production (application-prod.yaml)
@@ -770,9 +770,9 @@ spring:
 logging:
   level:
     root: WARN
-    com.mtbs: INFO
+    com.billforge: INFO
   file:
-    name: /var/log/mtbs/mtbs.log
+    name: /var/log/billforge/billforge.log
     max-size: 500MB
     max-history: 90
 
@@ -794,7 +794,7 @@ app:
 ```dockerfile
 # Dockerfile
 FROM openjdk:17-slim
-COPY target/mtbs-app.jar app.jar
+COPY target/billforge-app.jar app.jar
 
 # Set active profile
 ENV SPRING_PROFILES_ACTIVE=prod
@@ -810,11 +810,11 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 version: '3.8'
 services:
   app:
-    image: mtbs:latest
+    image: billforge:latest
     environment:
       SPRING_PROFILES_ACTIVE: prod
       DB_HOST: postgres
-      DB_USER: mtbs_user
+      DB_USER: billforge_user
       DB_PASSWORD: ${DB_PASSWORD}
       REDIS_HOST: redis
       JWT_SECRET: ${JWT_SECRET}
@@ -828,9 +828,9 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: mtbs_user
+      POSTGRES_USER: billforge_user
       POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: mtbs
+      POSTGRES_DB: billforge
 
   redis:
     image: redis:7-alpine
@@ -842,14 +842,14 @@ services:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mtbs-app
+  name: billforge-app
 spec:
   replicas: 3
   template:
     spec:
       containers:
       - name: app
-        image: mtbs:v1.0.0
+        image: billforge:v1.0.0
         ports:
         - containerPort: 8080
         env:
@@ -858,17 +858,17 @@ spec:
         - name: DB_HOST
           valueFrom:
             configMapKeyRef:
-              name: mtbs-config
+              name: billforge-config
               key: db-host
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mtbs-secrets
+              name: billforge-secrets
               key: db-password
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
-              name: mtbs-secrets
+              name: billforge-secrets
               key: jwt-secret
 ```
 
@@ -906,7 +906,7 @@ public class JwtConfig {
 
 2. **Property Name Mapping** - `snake_case` vs `camelCase`. Spring converts both: `stripe.publishable-key` = `stripe.keyId`. Can be confusing.
 
-3. **Profile-Specific Logging** - If you forget `logging.level.com.mtbs: DEBUG` in application-dev.yaml, dev environment logs at INFO level (surprising).
+3. **Profile-Specific Logging** - If you forget `logging.level.com.billforge: DEBUG` in application-dev.yaml, dev environment logs at INFO level (surprising).
 
 4. **Circular Property References** - `${some.property}` can reference other properties, but cycles cause errors.
 
@@ -914,6 +914,6 @@ public class JwtConfig {
 
 ## Related Documents
 
-- [ENTERPRISE_REFACTORING_SUMMARY.md](../ENTERPRISE_REFACTORING_SUMMARY.md) - Architecture overview
+- [ENTERPRISE_REFACTORING_SUMMARY.md](../00-overview/README.md) - Architecture overview
 - [observability.md](./observability.md) - Logging and metrics configuration
-- [payment-processing.md](./payment-processing.md) - Stripe integration config
+- [payment-processing.md](../05-platform-billing/payment-processing.md) - Stripe integration config

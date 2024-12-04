@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -22,7 +22,7 @@ related_documents:
 
 ## Executive Summary
 
-The **Multi-Tenant Billing System (Billforge)** is a Spring Boot 3.4.3 SaaS platform that enables independent tenants to manage subscriptions, generate invoices, process payments, and bill their own customers. Billforge enforces hard tenant isolation via PostgreSQL schema-per-tenant multitenancy, routes HTTP requests through a sophisticated filter chain, and guarantees reliable event delivery via the transactional outbox pattern. The system is organized into 8 separate modules (app, auth, admin, billing, tenant, business, notification, shared) with clear responsibilities. Without this architecture, a SaaS platform would risk data leakage across tenants, lose events on crashes, and struggle to support thousands of concurrent billing operations.
+The **Multi-Tenant Billing System (Billforge)** is a Spring Boot 3.3.6 SaaS platform that enables independent tenants to manage subscriptions, generate invoices, process payments, and bill their own customers. Billforge enforces hard tenant isolation via PostgreSQL schema-per-tenant multitenancy, routes HTTP requests through a sophisticated filter chain, and guarantees reliable event delivery via the transactional outbox pattern. The system is organized into 8 separate modules (app, auth, admin, billing, tenant, business, notification, shared) with clear responsibilities. Without this architecture, a SaaS platform would risk data leakage across tenants, lose events on crashes, and struggle to support thousands of concurrent billing operations.
 
 ---
 
@@ -111,9 +111,9 @@ This guarantees at-least-once event delivery, and idempotency keys prevent dupli
 - `spring.datasource.url` - PostgreSQL connection string
 - `spring.jpa.hibernate.ddl-auto` - Set to `validate` (migrations run via Flyway)
 - `spring.redis.host`, `spring.redis.port` - Redis connection
-- `mtbs.stripe.publishable-key`, `mtbs.stripe.secret-key` - Stripe credentials
-- `mtbs.scheduler.enabled` - Enable/disable Jobs (default: true)
-- `mtbs.observability.mdc-enabled` - MDC logging context (default: true)
+- `billforge.stripe.publishable-key`, `billforge.stripe.secret-key` - Stripe credentials
+- `billforge.scheduler.enabled` - Enable/disable Jobs (default: true)
+- `billforge.observability.mdc-enabled` - MDC logging context (default: true)
 
 ---
 
@@ -122,7 +122,7 @@ This guarantees at-least-once event delivery, and idempotency keys prevent dupli
 ### Package Structure
 
 ```
-com.mtbs/
+com.billforge/
 ├── app/              [Application Core]
 │   ├── config/       [Spring configuration beans]
 │   ├── filter/       [HTTP request filters]
@@ -255,13 +255,13 @@ Billforge enforces **two separate billing contexts**:
    - Tenant pays Billforge (you) for subscription
    - Entities: Subscription, Invoice (platform charges), Payment (platform receives)
    - Flow: BillingCycleJob → generates monthly invoice → tenant makes payment → mark as PAID → revenue recognized
-   - Module: `com.mtbs.billing`
+   - Module: `com.billforge.billing`
 
 2. **Business Billing (Tenant Schema)**
    - Tenant bills their own customers
    - Entities: BusinessInvoice, BusinessInvoiceItem, BusinessPayment (customer pays tenant)
    - Flow: Tenant manually creates invoices → customers pay tenant → tenant records payment
-   - Module: `com.mtbs.business`
+   - Module: `com.billforge.business`
 
 **Isolation**: businessInvoiceRepository queries hit tenant schema. invoiceRepository queries hit public schema. No cross-schema queries (except admin dashboards).
 
@@ -270,13 +270,13 @@ Billforge enforces **two separate billing contexts**:
 **Layer 1: Spring Annotations**
 
 ```java
-@SpringBootApplication(scanBasePackages = "com.mtbs")
+@SpringBootApplication(scanBasePackages = "com.billforge")
 @EnableAsync
 @EnableScheduling
 public class MultiTenantBillingSystemApplication { }
 ```
 
-- `scanBasePackages = "com.mtbs"` - only load Billforge beans, not framework samples
+- `scanBasePackages = "com.billforge"` - only load Billforge beans, not framework samples
 - `@EnableAsync` - allows async event listeners
 - `@EnableScheduling` - activates @Scheduled jobs
 
@@ -293,7 +293,7 @@ public class MultiTenantBillingSystemApplication { }
 ```yaml
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/mtbs
+    url: jdbc:postgresql://localhost:5432/billforge
     username: postgres
     password: secret
   jpa:
@@ -306,7 +306,7 @@ spring:
     pool:
       size: 4  # Quartz thread pool size
 
-mtbs:
+billforge:
   stripe:
     publishable-key: ${STRIPE_PUBLISHABLE_KEY}
     secret-key: ${STRIPE_SECRET_KEY}
@@ -611,7 +611,7 @@ mtbs:
 
 - **Concurrency**: Multiple threads in thread pool processing same tenant's requests. Thread pool size matters. If pool has 10 threads and 10 tenants make simultaneous requests, each thread could use TenantContext for different tenant. As long as TenantContext is ThreadLocal, no collision. If context is moved to instance variable, threads interfere.
 
-- **Timezone**: All timestamps are stored as `TIMESTAMPTZ` (UTC) in PostgreSQL. Tenant's timezone stored in Tenant entity. API returns UTC; frontend converts to tenant's local timezone. No "midnight" ambiguity because times are explicit (e.g., 2026-04-01T00:00:00+00:00).
+- **Timezone**: All timestamps are stored as `TIMESTAMPTZ` (UTC) in PostgreSQL. Tenant's timezone stored in Tenant entity. API returns UTC; frontend converts to tenant's local timezone. No "midnight" ambiguity because times are explicit (e.g., 2024-04-01T00:00:00+00:00).
 
 - **Tenant Isolation**: Schema-per-tenant means a tenant cannot see another tenant's schema. Public schema is readable by all tenants (plan list, platform admin data visible to authorized users). Admin can query cross-tenant data if they have TENANT_MANAGE permission.
 

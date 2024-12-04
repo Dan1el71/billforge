@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-14
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -130,8 +130,8 @@ billing:
     "trialStart": null,
     "trialEnd": null,
     "trialDaysRemaining": null,
-    "currentPeriodStart": "2026-04-15T00:00:00Z",
-    "currentPeriodEnd": "2026-05-15T00:00:00Z",
+    "currentPeriodStart": "2024-04-15T00:00:00Z",
+    "currentPeriodEnd": "2024-05-15T00:00:00Z",
     "priceMonthly": 5000.00,
     "priceAnnual": 50000.00,
     "currency": "USD",
@@ -210,7 +210,7 @@ GET /api/v1/subscriptions/upgrade/preview?targetPlanId=3&billingCycle=ANNUAL
     "finalChargeAmount": 100000.00,
     "finalChargeInCents": 10000000,
     "savingsVsMonthly": 12000.00,
-    "newPeriodStart": "2026-05-14T14:30:00Z",
+    "newPeriodStart": "2024-05-14T14:30:00Z",
     "newPeriodEnd": "2027-05-14T14:30:00Z",
     "currency": "USD"
   },
@@ -261,7 +261,7 @@ finalCharge = fullCyclePrice - proratedCredit
     "amountInCents": 500000,
     "currency": "USD",
     "invoiceId": 456,
-    "invoiceNumber": "INV-2026-0042",
+    "invoiceNumber": "INV-2024-0042",
     "keyId": "rzp_live_KEY_ABC123",
     "subscriptionId": 123,
     "planId": 2
@@ -347,8 +347,8 @@ new Stripe(options).open();
     "planName": "FREE",
     "status": "ACTIVE",
     "billingCycle": "MONTHLY",
-    "currentPeriodStart": "2026-04-15T00:00:00Z",
-    "currentPeriodEnd": "2026-05-15T00:00:00Z",
+    "currentPeriodStart": "2024-04-15T00:00:00Z",
+    "currentPeriodEnd": "2024-05-15T00:00:00Z",
     "cancelAtPeriodEnd": false,
     "scheduledDowngradePlanId": 1,
     "downgradeReason": "Too expensive for current use",
@@ -465,10 +465,10 @@ ANNUAL → MONTHLY:
   "data": {
     "id": 123,
     "status": "CANCELLED",
-    "cancelledAt": "2026-05-14T14:30:00Z",
+    "cancelledAt": "2024-05-14T14:30:00Z",
     "cancelAtPeriodEnd": true,
-    "currentPeriodEnd": "2026-05-15T00:00:00Z",
-    "message": "Subscription cancelled. Service will end on 2026-05-15."
+    "currentPeriodEnd": "2024-05-15T00:00:00Z",
+    "message": "Subscription cancelled. Service will end on 2024-05-15."
   },
   "message": "Subscription cancelled successfully"
 }
@@ -497,7 +497,7 @@ ANNUAL → MONTHLY:
     "status": "ACTIVE",
     "cancelledAt": null,
     "cancelAtPeriodEnd": false,
-    "currentPeriodEnd": "2026-05-15T00:00:00Z",
+    "currentPeriodEnd": "2024-05-15T00:00:00Z",
     "message": "Subscription reactivated."
   },
   "message": "Subscription reactivated successfully"
@@ -527,7 +527,7 @@ GET /api/v1/invoices?page=0&size=20&sort=createdAt,desc
     "content": [
       {
         "id": 456,
-        "invoiceNumber": "INV-2026-0042",
+        "invoiceNumber": "INV-2024-0042",
         "subscriptionId": 123,
         "status": "PAID",
         "subtotal": 5000.00,
@@ -535,10 +535,10 @@ GET /api/v1/invoices?page=0&size=20&sort=createdAt,desc
         "discountAmount": 0,
         "totalAmount": 5900.00,
         "currency": "USD",
-        "dueDate": "2026-06-14T00:00:00Z",
-        "paidAt": "2026-05-14T14:35:00Z",
-        "billingPeriodStart": "2026-04-15T00:00:00Z",
-        "billingPeriodEnd": "2026-05-15T00:00:00Z",
+        "dueDate": "2024-06-14T00:00:00Z",
+        "paidAt": "2024-05-14T14:35:00Z",
+        "billingPeriodStart": "2024-04-15T00:00:00Z",
+        "billingPeriodEnd": "2024-05-15T00:00:00Z",
         "pdfUrl": null,
         "lineItems": [
           {
@@ -550,7 +550,7 @@ GET /api/v1/invoices?page=0&size=20&sort=createdAt,desc
             "lineItemType": "PLAN"
           }
         ],
-        "createdAt": "2026-04-15T00:00:00Z"
+        "createdAt": "2024-04-15T00:00:00Z"
       }
     ],
     "totalElements": 42,
@@ -580,7 +580,7 @@ GET /api/v1/invoices?page=0&size=20&sort=createdAt,desc
   "success": true,
   "data": {
     "id": 456,
-    "invoiceNumber": "INV-2026-0042",
+    "invoiceNumber": "INV-2024-0042",
     "subscriptionId": 123,
     "status": "PAID",
     "subtotal": 5000.00,
@@ -588,11 +588,11 @@ GET /api/v1/invoices?page=0&size=20&sort=createdAt,desc
     "discountAmount": 0,
     "totalAmount": 5900.00,
     "currency": "USD",
-    "dueDate": "2026-06-14T00:00:00Z",
-    "paidAt": "2026-05-14T14:35:00Z",
-    "billingPeriodStart": "2026-04-15T00:00:00Z",
-    "billingPeriodEnd": "2026-05-15T00:00:00Z",
-    "pdfUrl": "https://s3.amazonaws.com/invoices/INV-2026-0042.pdf?X-Amz-Expires=3600",
+    "dueDate": "2024-06-14T00:00:00Z",
+    "paidAt": "2024-05-14T14:35:00Z",
+    "billingPeriodStart": "2024-04-15T00:00:00Z",
+    "billingPeriodEnd": "2024-05-15T00:00:00Z",
+    "pdfUrl": "https://s3.amazonaws.com/invoices/INV-2024-0042.pdf?X-Amz-Expires=3600",
     "stripePaymentLinkUrl": "inv_2c7P8k4x9M3z5q",
     "lineItems": [
       {
@@ -612,8 +612,8 @@ GET /api/v1/invoices?page=0&size=20&sort=createdAt,desc
         "lineItemType": "TAX"
       }
     ],
-    "createdAt": "2026-04-15T00:00:00Z",
-    "updatedAt": "2026-05-14T14:35:00Z"
+    "createdAt": "2024-04-15T00:00:00Z",
+    "updatedAt": "2024-05-14T14:35:00Z"
   },
   "message": "Invoice fetched successfully"
 }
@@ -634,7 +634,7 @@ GET /api/v1/invoices/456/download
 ```
 HTTP/1.1 200 OK
 Content-Type: application/pdf
-Content-Disposition: attachment; filename="INV-2026-0042.pdf"
+Content-Disposition: attachment; filename="INV-2024-0042.pdf"
 Content-Length: 45823
 
 [PDF binary data]
@@ -694,7 +694,7 @@ Content-Length: 45823
     "currency": "USD",
     "keyId": "rzp_live_KEY_ABC123",
     "invoiceId": 456,
-    "invoiceNumber": "INV-2026-0042"
+    "invoiceNumber": "INV-2024-0042"
   },
   "message": "Payment order created successfully"
 }
@@ -740,7 +740,7 @@ Content-Length: 45823
     "stripePaymentIntentId": "ord_2c7P8k4x9M3z5q",
     "stripePaymentIntentId": "pay_2c7P8k4x9M3z5q",
     "stripeClientSecret": "9ef4dffbfd84f1318f6739a3ce19f9d85851857ae648f114332d8401e0949a3d",
-    "paidAt": "2026-05-14T14:35:00Z"
+    "paidAt": "2024-05-14T14:35:00Z"
   },
   "message": "Payment verified and captured successfully"
 }
@@ -833,8 +833,8 @@ Or for full refund:
     "status": "REFUNDED",
     "amount": 500000,
     "refundAmount": 100000,
-    "refundId": "rfnd_2c7P8k4x9M3z5q",
-    "refundedAt": "2026-05-14T14:40:00Z"
+    "refundId": "re_2c7P8k4x9M3z5q",
+    "refundedAt": "2024-05-14T14:40:00Z"
   },
   "message": "Refund initiated successfully"
 }
@@ -868,8 +868,8 @@ Or for full refund:
         "limit": 10000,
         "remaining": 1500,
         "percentUsed": 85.0,
-        "periodStart": "2026-05-01T00:00:00Z",
-        "periodEnd": "2026-05-31T23:59:59Z"
+        "periodStart": "2024-05-01T00:00:00Z",
+        "periodEnd": "2024-05-31T23:59:59Z"
       },
       {
         "metric": "ACTIVE_USERS",
@@ -877,8 +877,8 @@ Or for full refund:
         "limit": 20,
         "remaining": 8,
         "percentUsed": 60.0,
-        "periodStart": "2026-05-01T00:00:00Z",
-        "periodEnd": "2026-05-31T23:59:59Z"
+        "periodStart": "2024-05-01T00:00:00Z",
+        "periodEnd": "2024-05-31T23:59:59Z"
       },
       {
         "metric": "STORAGE_GB",
@@ -886,8 +886,8 @@ Or for full refund:
         "limit": 10,
         "remaining": 5.8,
         "percentUsed": 42.0,
-        "periodStart": "2026-05-01T00:00:00Z",
-        "periodEnd": "2026-05-31T23:59:59Z"
+        "periodStart": "2024-05-01T00:00:00Z",
+        "periodEnd": "2024-05-31T23:59:59Z"
       }
     ]
   },
@@ -910,7 +910,7 @@ Or for full refund:
 
 **Request:**
 ```
-GET /api/v1/usage?start=2026-05-01T00:00:00Z&end=2026-05-31T23:59:59Z
+GET /api/v1/usage?start=2024-05-01T00:00:00Z&end=2024-05-31T23:59:59Z
 ```
 
 **Response (200 OK):**
@@ -924,8 +924,8 @@ GET /api/v1/usage?start=2026-05-01T00:00:00Z&end=2026-05-31T23:59:59Z
       "limit": 10000,
       "remaining": 1500,
       "percentUsed": 85.0,
-      "periodStart": "2026-05-01T00:00:00Z",
-      "periodEnd": "2026-05-31T23:59:59Z"
+      "periodStart": "2024-05-01T00:00:00Z",
+      "periodEnd": "2024-05-31T23:59:59Z"
     },
     {
       "metric": "ACTIVE_USERS",
@@ -933,8 +933,8 @@ GET /api/v1/usage?start=2026-05-01T00:00:00Z&end=2026-05-31T23:59:59Z
       "limit": 20,
       "remaining": 8,
       "percentUsed": 60.0,
-      "periodStart": "2026-05-01T00:00:00Z",
-      "periodEnd": "2026-05-31T23:59:59Z"
+      "periodStart": "2024-05-01T00:00:00Z",
+      "periodEnd": "2024-05-31T23:59:59Z"
     }
   ],
   "message": "Usage for period fetched successfully"
@@ -960,11 +960,11 @@ GET /api/v1/usage?start=2026-05-01T00:00:00Z&end=2026-05-31T23:59:59Z
       "planName": "PRO",
       "billingCycle": "MONTHLY",
       "price": 5000.00,
-      "renewalDate": "2026-05-15T00:00:00Z"
+      "renewalDate": "2024-05-15T00:00:00Z"
     },
     "nextPayment": {
       "amount": 5900.00,
-      "dueDate": "2026-05-15T00:00:00Z",
+      "dueDate": "2024-05-15T00:00:00Z",
       "status": "UPCOMING"
     },
     "usage": {
@@ -974,23 +974,23 @@ GET /api/v1/usage?start=2026-05-01T00:00:00Z&end=2026-05-31T23:59:59Z
     },
     "upcomingEvents": [
       {
-        "date": "2026-05-15T00:00:00Z",
+        "date": "2024-05-15T00:00:00Z",
         "event": "Billing cycle renewal",
         "amount": 5900.00
       }
     ],
     "invoiceHistory": [
       {
-        "invoiceNumber": "INV-2026-0042",
+        "invoiceNumber": "INV-2024-0042",
         "amount": 5900.00,
-        "date": "2026-04-15T00:00:00Z",
+        "date": "2024-04-15T00:00:00Z",
         "status": "PAID"
       }
     ],
     "usageTrend": [
-      { "date": "2026-05-08", "apiCalls": 1200 },
-      { "date": "2026-05-09", "apiCalls": 1100 },
-      { "date": "2026-05-10", "apiCalls": 1500 }
+      { "date": "2024-05-08", "apiCalls": 1200 },
+      { "date": "2024-05-09", "apiCalls": 1100 },
+      { "date": "2024-05-10", "apiCalls": 1500 }
     ]
   },
   "message": "Billing dashboard fetched successfully"

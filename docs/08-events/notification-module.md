@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-16
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -679,13 +679,13 @@ Variables passed to Thymeleaf template engine for rendering.
 
 **OutboxEventProcessor logs with correlation ID:**
 ```
-2026-05-16 14:23:45.123 INFO [OUTBOX] [correlationId=a1b2c3d4] eventType=INVOICE_GENERATED aggregateId=INV-12345 retryCount=0
-2026-05-16 14:23:45.456 INFO [OUTBOX] [correlationId=a1b2c3d4] SUCCESS eventType=INVOICE_GENERATED durationMs=333
+2024-05-16 14:23:45.123 INFO [OUTBOX] [correlationId=a1b2c3d4] eventType=INVOICE_GENERATED aggregateId=INV-12345 retryCount=0
+2024-05-16 14:23:45.456 INFO [OUTBOX] [correlationId=a1b2c3d4] SUCCESS eventType=INVOICE_GENERATED durationMs=333
 ```
 
 **NotificationOrchestrator logs async failures:**
 ```
-2026-05-16 14:23:50.123 ERROR [correlationId=a1b2c3d4] [tenantId=100] Notification failed: template=billing/invoice-generated recipient=user@example.com error=MessagingException: Connection refused
+2024-05-16 14:23:50.123 ERROR [correlationId=a1b2c3d4] [tenantId=100] Notification failed: template=billing/invoice-generated recipient=user@example.com error=MessagingException: Connection refused
 ```
 
 ### Key Fields to Log

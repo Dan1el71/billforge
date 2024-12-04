@@ -4,7 +4,7 @@
 
 The **Billing Flow Integration Tests** validate complete billing workflows from subscription creation through payment collection, including complex scenarios like mid-cycle plan changes with proration.
 
-**Test Location:** `src/test/java/com/mtbs/integration/BillingFlowIntegrationTest.java`
+**Test Location:** `src/test/java/com/billforge/integration/BillingFlowIntegrationTest.java`
 
 ---
 
@@ -680,7 +680,7 @@ mvn clean test jacoco:report
 
 ## Related Documentation
 
-- [Billing Module](../backend/04-business-modules/invoicing.md)
-- [Payment Processing](../backend/04-business-modules/payments.md)
-- [Subscription Lifecycle](../backend/01-foundation/request-flow.md)
+- [Billing Module](../05-platform-billing/invoice.md)
+- [Payment Processing](../05-platform-billing/payment-processing.md)
+- [Subscription Lifecycle](../01-architecture/request-flow.md)
 - [Testing Strategy](./testing-strategy.md)

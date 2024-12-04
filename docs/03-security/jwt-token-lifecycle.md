@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-14
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -60,8 +60,8 @@ Payload:
     "roleId": 2,                     // Role ID (for RBAC)
     "tokenVersion": 5,               // Incremented on password change
     "typ": "ACCESS",                 // Token type
-    "iss": "mtbs",                   // Issuer
-    "aud": ["mtbs-users"],          // Audience
+    "iss": "billforge",                   // Issuer
+    "aud": ["billforge-users"],          // Audience
     "iat": 1715666400,              // Issued at
     "exp": 1715667300               // Expires at (15 min = 900 sec)
   }
@@ -81,8 +81,8 @@ Signature:
   "token": "550e8400-e29b-41d4-a716-446655440000",  // UUID
   "user_id": 123,
   "revoked": false,
-  "expiry_date": "2026-05-21T14:30:00Z",            // 7 days
-  "created_at": "2026-05-14T14:30:00Z"
+  "expiry_date": "2024-05-21T14:30:00Z",            // 7 days
+  "created_at": "2024-05-14T14:30:00Z"
 }
 ```
 
@@ -225,7 +225,7 @@ User table:
     "email": "user@acme.com",
     "password_hash": "$2a$10$...",
     "token_version": 5,           ← CRITICAL
-    "updated_at": "2026-05-14T14:30:00Z"
+    "updated_at": "2024-05-14T14:30:00Z"
   }
 
 Old JWT (compromised):
@@ -370,8 +370,8 @@ public RefreshToken rotateRefreshToken(User user) {
   "roleId": 2,               // CRITICAL: Permission loading
   "tokenVersion": 5,         // CRITICAL: Immediate revocation
   "typ": "ACCESS",           // Token type identifier
-  "iss": "mtbs",             // Issuer (for verification)
-  "aud": ["mtbs-users"],     // Audience (for verification)
+  "iss": "billforge",             // Issuer (for verification)
+  "aud": ["billforge-users"],     // Audience (for verification)
   "iat": 1715666400,         // Issued at (timestamp)
   "exp": 1715667300          // Expiration (timestamp)
 }

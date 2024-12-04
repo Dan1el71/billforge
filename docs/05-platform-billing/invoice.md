@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -34,7 +34,7 @@ Without invoices, billing would be ad-hoc queries over subscriptions:
 - "How much did customer pay in 2025?" - Requires aggregating many transactions
 
 With invoices as the canonical record:
-- "What was invoice #INV-2026-00100?" - Query single row, get all details (amount, period, status, payment date)
+- "What was invoice #INV-2024-00100?" - Query single row, get all details (amount, period, status, payment date)
 - Audit trail is built-in (created_at, updated_at, paid_at)
 - Financial reporting is simple (sum PAID invoices for revenue)
 - Compliance: invoices are immutable records (soft-deletes only, never truly deleted)
@@ -101,7 +101,7 @@ public class Invoice extends AuditableEntity {
     
     // Identification
     @Column(unique = true)
-    private String invoiceNumber;       // "INV-2026-00100"
+    private String invoiceNumber;       // "INV-2024-00100"
     
     // References
     private Long subscriptionId;        // Which subscription this invoice is for
@@ -151,7 +151,7 @@ OPEN (Invoice Finalized)
   ├─ status = OPEN
   ├─ dueDate = createdAt + 7 days
   ├─ Publish: InvoiceOpenedEvent
-  ├─ NotificationService sends: "Invoice #INV-2026-00100 due by May 1"
+  ├─ NotificationService sends: "Invoice #INV-2024-00100 due by May 1"
   │
 [OPEN → PAID or OPEN → OVERDUE or OPEN → VOID]
   │
@@ -176,15 +176,15 @@ VOID (Cancelled)
 
 ```
 Prefix: "INV"
-Date: YYYY-MM (e.g., 2026-04)
+Date: YYYY-MM (e.g., 2024-04)
 Sequence: 00001, 00002, ...
 
-Format: INV-2026-04-00001
+Format: INV-2024-04-00001
 
 Example:
-  Invoice 1 (created April 1, 2026): INV-2026-04-00001
-  Invoice 2 (created April 5, 2026): INV-2026-04-00002
-  Invoice 1 (created May 1, 2026):   INV-2026-05-00001 (sequence resets per month)
+  Invoice 1 (created April 1, 2026): INV-2024-04-00001
+  Invoice 2 (created April 5, 2026): INV-2024-04-00002
+  Invoice 1 (created May 1, 2026):   INV-2024-05-00001 (sequence resets per month)
 ```
 
 **Implementation**:
@@ -235,7 +235,7 @@ Invoice Status: OPEN + dueDate passed
   ↓ SubscriptionService.initiatePayment()
   ├─ Create PaymentIntent (amount, payment_intent_id=invoiceId, receipt=invoiceNumber)
   ├─ Return order details to frontend
-  ├─ Frontend displays: "Pay $1,020 for INV-2026-04-00001"
+  ├─ Frontend displays: "Pay $1,020 for INV-2024-04-00001"
   ├─ User completes payment on Stripe checkout
   │
 Stripe Webhook: payment.authorized
@@ -263,14 +263,14 @@ GET /api/v1/invoices
   [
     {
       "id": 100,
-      "invoiceNumber": "INV-2026-04-00001",
+      "invoiceNumber": "INV-2024-04-00001",
       "status": "PAID",
       "amount": 1020.15,
       "currency": "USD",
-      "dueDate": "2026-05-01T00:00:00Z",
-      "paidAt": "2026-04-28T10:30:00Z",
-      "billingPeriodStart": "2026-04-01T00:00:00Z",
-      "billingPeriodEnd": "2026-05-01T00:00:00Z",
+      "dueDate": "2024-05-01T00:00:00Z",
+      "paidAt": "2024-04-28T10:30:00Z",
+      "billingPeriodStart": "2024-04-01T00:00:00Z",
+      "billingPeriodEnd": "2024-05-01T00:00:00Z",
       "lineItems": [...]
     }
   ]
@@ -287,7 +287,7 @@ POST /api/v1/invoices/{id}/void
 GET /api/v1/invoices/{id}/download
   Required: BILLING_MANAGE permission
   Returns: PDF file (application/pdf, attachment)
-  Content-Disposition: attachment; filename="INV-2026-04-00001.pdf"
+  Content-Disposition: attachment; filename="INV-2024-04-00001.pdf"
 ```
 
 ### Domain Events
@@ -297,11 +297,11 @@ GET /api/v1/invoices/{id}/download
 {
   "eventType": "INVOICE_GENERATED",
   "invoiceId": 100,
-  "invoiceNumber": "INV-2026-04-00001",
+  "invoiceNumber": "INV-2024-04-00001",
   "subscriptionId": 789,
   "amount": 1020.15,
   "currency": "USD",
-  "dueDate": "2026-05-01",
+  "dueDate": "2024-05-01",
   "tenantId": 456,
   "tenantName": "ACME Inc."
 }
@@ -314,9 +314,9 @@ Listeners: NotificationListener (enqueue invoice email), AuditListener (log crea
 {
   "eventType": "INVOICE_PAID",
   "invoiceId": 100,
-  "invoiceNumber": "INV-2026-04-00001",
+  "invoiceNumber": "INV-2024-04-00001",
   "amount": 1020.15,
-  "paidAt": "2026-04-28T10:30:00Z",
+  "paidAt": "2024-04-28T10:30:00Z",
   "paymentId": "pay_KjL456m789nOp",
   "tenantId": 456
 }

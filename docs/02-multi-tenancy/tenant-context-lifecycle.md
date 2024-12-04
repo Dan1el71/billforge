@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-04-15
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -431,7 +431,7 @@ See Lifecycle: From Request Entry to Response ASCII art above.
 ---
 
 ## Related Documents
-- [authentication.md](./authentication.md) - Where TenantContext is first set by JwtAuthenticationFilter
+- [authentication.md](../03-security/authentication.md) - Where TenantContext is first set by JwtAuthenticationFilter
 - [multi-tenancy-strategy.md](../02-multi-tenancy/multi-tenancy-strategy.md) - Schema provisioning and tenant isolation strategy
 - [request-flow.md](../01-architecture/request-flow.md) - Full HTTP request lifecycle showing TenantContext
 - [system-design.md](../01-architecture/system-design.md) - Architecture overview

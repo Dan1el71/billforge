@@ -1,6 +1,6 @@
 ---
 version: 1.0
-date: 2026-05-22
+date: 2024-09-20
 author: Daniel Rangel
 status: Production Ready
 tags:
@@ -32,7 +32,7 @@ tags:
 2. **Reduce Payment Failures** - Implement PaymentIntent payment verification with Stripe integration
 3. **Improve Cash Flow** - Automated invoice generation and payment reconciliation
 4. **Enable Multi-Tenant SaaS** - Complete tenant isolation with schema-per-tenant architecture
-5. **Ensure Compliance** - Audit trails, GDPR-ready consent management, webhook security
+5. **Ensure Compliance** - Audit trails, data export and deletion hooks, webhook security
 
 ### Secondary Goals
 1. **Scalability** - Support 10,000+ concurrent users, 100,000+ subscriptions
@@ -80,7 +80,7 @@ tags:
 | **Data Segregation** | Row-level tenant_id filtering on all queries |
 | **Authentication** | Tenant-aware JWT claims |
 | **Configuration** | Per-tenant customization (branding, payment terms) |
-| **Compliance** | GDPR data export/deletion per tenant |
+| **Compliance** | Audit trails, soft delete and tenant isolation; automated GDPR export is not implemented |
 
 ---
 
@@ -123,7 +123,7 @@ tags:
 │  │         Kubernetes Cluster (3+ nodes)            │  │
 │  │  ┌────────────────────────────────────────────┐  │  │
 │  │  │    Billforge Pod (Replicas: 3+)                │  │  │
-│  │  │  - Spring Boot 3.4.3 / Java 17            │  │  │
+│  │  │  - Spring Boot 3.3.6 / Java 21            │  │  │
 │  │  │  - CPU: 2 cores, Memory: 4GB per pod      │  │  │
 │  │  │  - Auto-scaling: 3-10 replicas            │  │  │
 │  │  │  - Health checks: Liveness + Readiness    │  │  │
@@ -230,7 +230,7 @@ tags:
 - ✅ Regular security audits
 
 ### Data Protection
-- ✅ GDPR compliance (data export, deletion, consent)
+- ✅ audit trails and data export hooks
 - ✅ Encryption at rest (database, S3)
 - ✅ Encryption in transit (TLS 1.2+)
 - ✅ Row-level security (tenant isolation)
@@ -385,11 +385,11 @@ This project includes 33+ comprehensive documentation files organized in 5 phase
 
 | Role | Name | Email |
 |------|------|-------|
-| **Product Owner** | [Name] | product@example.com |
-| **Tech Lead** | Daniel Rangel | manoj@example.com |
-| **Engineering Lead** | [Name] | engineering@example.com |
-| **DevOps Lead** | [Name] | devops@example.com |
-| **Security** | [Name] | security@example.com |
+| **Product Owner** | Daniel Rangel | product@example.com |
+| **Tech Lead** | Daniel Rangel | daniel@example.com |
+| **Engineering Lead** | Daniel Rangel | engineering@example.com |
+| **DevOps Lead** | Daniel Rangel | devops@example.com |
+| **Security** | Daniel Rangel | security@example.com |
 
 ---
 
@@ -397,7 +397,7 @@ This project includes 33+ comprehensive documentation files organized in 5 phase
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | May 2026 | Initial release |
+| 1.0 | September 2024 | Initial release |
 
 ---
 
